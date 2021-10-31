@@ -7,12 +7,13 @@ ASSIGNMENT: Maze Lab
 
 PURPOSE OF THE LAB: Solving mazes
 
-MISTAKES:
-NEW CONCEPTS LEARNED:
-HOW I FEEL ABOUT THIS LAB: 
+MISTAKES: I kept getting a StackOverflowError due to my poor recursive calls
+NEW CONCEPTS LEARNED: A more complex version of areaFill that is more limited
+HOW I FEEL ABOUT THIS LAB: Satisfied
 CREDITS: Carson Graham sparked an idea when I was talking to him about some of the
          difficulties I was having. Abhinav gave me a similar idea that was slightly
- different and a little easier to implement.
+         different and a little easier to implement. The CSCS club helped me through
+         the last set of problems I was facing.
 
 STUDENTS WHOM I HELPED: N/A
 **********************************************************************************/
@@ -195,8 +196,8 @@ class Maze {
    } // markTheCorrectPath
 
    /**
-    * precondition:
-    * postcondition:
+    * precondition: Same as markTheCorrectPath
+    * postcondition: Same as markTheCorrectPath but also prints the number of steps
     */
    private boolean markCorrectPathAndCountStars(int r, int c, int count) {
       //checks bounds
@@ -234,3 +235,140 @@ class Maze {
       return false;
    } // markCorrectPathAndCountStars
 }
+
+/* Output:
+C:\Users\samue\.jdks\openjdk-17.0.1\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.3\lib\idea_rt.jar=60811:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.3\bin" -Dfile.encoding=UTF-8 -classpath "C:\Users\samue\Homework for CSAB\out\production\Homework for CSAB" Pd6SamuelPrudencioMazeLab
+
+
+Enter the maze's filename (file extension not needed): maze1
+Maze:
+WWWWWWWW
+W....W.W
+WW.WW..W
+W....W.W
+W.W.WW.E
+S.W.WW.W
+WW.....W
+WWWWWWWW
+
+
+What do you want to do (choose 1, 2, or 3):
+   1: Mark only the correct path.
+   2: Mark only the correct path, and display the count of STEPs.
+   3: Exit
+1
+WWWWWWWW
+W....W.W
+WW.WW..W
+W***.W.W
+W*W*WW*E
+S*W*WW*W
+WW.****W
+WWWWWWWW
+
+
+Enter the maze's filename (file extension not needed): maze2
+Maze:
+WWWSWWWWWW
+W....W.W.W
+WWWW.....W
+W...W.WW.W
+W.W....W.W
+WEWWWWWWWW
+
+
+What do you want to do (choose 1, 2, or 3):
+   1: Mark only the correct path.
+   2: Mark only the correct path, and display the count of STEPs.
+   3: Exit
+2
+12
+WWWSWWWWWW
+W..**W.W.W
+WWWW**...W
+W***W*WW.W
+W*W***.W.W
+WEWWWWWWWW
+
+
+Enter the maze's filename (file extension not needed): maze3
+Maze:
+..WW
+W..S
+E.WW
+
+
+What do you want to do (choose 1, 2, or 3):
+   1: Mark only the correct path.
+   2: Mark only the correct path, and display the count of STEPs.
+   3: Exit
+1
+..WW
+W**S
+E*WW
+
+
+Enter the maze's filename (file extension not needed): maze5NoPath
+Maze:
+WWEWW
+W...W
+W.W.X
+WWWWW
+
+
+What do you want to do (choose 1, 2, or 3):
+   1: Mark only the correct path.
+   2: Mark only the correct path, and display the count of STEPs.
+   3: Exit
+2
+No Path found!
+WWEWW
+W...W
+W.W.X
+WWWWW
+
+
+Enter the maze's filename (file extension not needed): maze6NoPath
+Maze:
+WWWWW
+W...W
+W.W.W
+S.WWE
+WWWWW
+
+
+What do you want to do (choose 1, 2, or 3):
+   1: Mark only the correct path.
+   2: Mark only the correct path, and display the count of STEPs.
+   3: Exit
+1
+No Path found!
+WWWWW
+W...W
+W.W.W
+S.WWE
+WWWWW
+
+
+Enter the maze's filename (file extension not needed): maze1
+Maze:
+WWWWWWWW
+W....W.W
+WW.WW..W
+W....W.W
+W.W.WW.E
+S.W.WW.W
+WW.....W
+WWWWWWWW
+
+
+What do you want to do (choose 1, 2, or 3):
+   1: Mark only the correct path.
+   2: Mark only the correct path, and display the count of STEPs.
+   3: Exit
+3
+Goodbye!
+
+
+Process finished with exit code 0
+ */
