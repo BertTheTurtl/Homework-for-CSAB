@@ -10,13 +10,16 @@ PURPOSE OF THE LAB: Solving mazes
 MISTAKES:
 NEW CONCEPTS LEARNED:
 HOW I FEEL ABOUT THIS LAB: 
-CREDITS: 
+CREDITS: Carson Graham sparked an idea when I was talking to him about some of the
+         difficulties I was having. Abhinav gave me a similar idea that was slightly
+ different and a little easier to implement.
 
 STUDENTS WHOM I HELPED: N/A
 **********************************************************************************/
 
 import java.util.*;
 import java.io.*;
+
 public class Pd6SamuelPrudencioMazeLab
 {
    public static void main(String[] args) throws FileNotFoundException
@@ -81,7 +84,6 @@ public class Pd6SamuelPrudencioMazeLab
          pw.println (row);
       } 
       pw.close();
-   
    } // transfer2DGridToFile
 
 }  // Pd6SamuelPrudencioMazeLab
@@ -160,35 +162,33 @@ class Maze {
    /*  Recur until you find E, then mark the True path */
    private boolean markTheCorrectPath(int r, int c) {
       //checks bounds
-      if (r < 0 || r >= maze.length || c < 0 || c >= maze[0].length) {
-         return false;
-      }
-
-      //path has already filled
-      if (maze[r][c] == STEP) {
-         return false;
-      }
-
-      //do not fill these tiles
-      if (maze[r][c] == WALL) {
-         return false;
-      }
-
-      if (maze[r][c] == EXIT) {
-         return true;
-      }
-
-      maze[r][c] = STEP;
-      int[][] recur = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
-
-      //recurs fill to replace the characters
-      for (int[] tracker : recur) {
-         if (markTheCorrectPath(r + tracker[0], c + tracker[1])) {
+      if (r >= 0 && r < maze.length && c >= 0 && c < maze[0].length)
+      {
+         if (maze[r][c] == EXIT)
+         {
             return true;
          }
-         else
+         else if (maze[r][c] == STEP || maze[r][c] == WALL)
          {
+            return false;
+         }
+         else if (maze[r][c] == DOT) {
+            maze[r][c] = 'o';
 
+            //recurs fill to replace the characters
+            if (markTheCorrectPath(r + 1, c) || markTheCorrectPath(r - 1, c) || markTheCorrectPath(r, c + 1) || markTheCorrectPath(r, c - 1))
+            {
+               maze[r][c] = STEP;
+               return true;
+            }
+            else
+            {
+               maze[r][c] = DOT;
+            }
+         }
+         else if (maze[r][c] == START)
+         {
+            return (markTheCorrectPath(r + 1, c) || markTheCorrectPath(r - 1, c) || markTheCorrectPath(r, c + 1) || markTheCorrectPath(r, c - 1));
          }
       }
       return false;
@@ -199,25 +199,38 @@ class Maze {
     * postcondition:
     */
    private boolean markCorrectPathAndCountStars(int r, int c, int count) {
-      if (markTheCorrectPath(r, c)) {
-         for (int a = 0; a < maze.length; a++) {
-            for (int b = 0; b < maze[0].length; b++) {
-               if (maze[a][b] == STEP) {
-                  count++;
-               }
+      //checks bounds
+      if (r >= 0 && r < maze.length && c >= 0 && c < maze[0].length)
+      {
+         if (maze[r][c] == EXIT)
+         {
+            count = count - 1;
+            System.out.println(count);
+            return true;
+         }
+         else if (maze[r][c] == STEP || maze[r][c] == WALL)
+         {
+            return false;
+         }
+         else if (maze[r][c] == DOT) {
+            maze[r][c] = 'o';
+
+            //recurs fill to replace the characters
+            if (markCorrectPathAndCountStars(r + 1, c, count + 1) || markCorrectPathAndCountStars(r - 1, c, count + 1) || markCorrectPathAndCountStars(r, c + 1, count + 1) || markCorrectPathAndCountStars(r, c - 1, count + 1))
+            {
+               maze[r][c] = STEP;
+               return true;
+            }
+            else
+            {
+               maze[r][c] = DOT;
             }
          }
-         return true;
+         else if (maze[r][c] == START)
+         {
+            return (markCorrectPathAndCountStars(r + 1, c, count + 1) || markCorrectPathAndCountStars(r - 1, c, count + 1) || markCorrectPathAndCountStars(r, c + 1, count + 1) || markCorrectPathAndCountStars(r, c - 1, count + 1));
+         }
       }
       return false;
    } // markCorrectPathAndCountStars
 }
-/*
- | | Main (Partially)
- |*| buildCharArr
- |*| Maze default constructor
- |*| display
- |*| solve
- | | markTheCorrectPath (WORKS BUT MUST BE MADE MORE EFFICIENT)
- | | markCorrectPathAndCountStars (Uses MTCP, so it has the same problem lol)
- */
