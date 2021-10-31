@@ -19,7 +19,7 @@ import java.util.*;
 import java.io.*;
 public class Pd6SamuelPrudencioMazeLab
 {
-   public static void main(String[] args)
+   public static void main(String[] args) throws FileNotFoundException
    {
       Scanner sc = new Scanner(System.in);
       char[][] retArr;
@@ -47,9 +47,15 @@ public class Pd6SamuelPrudencioMazeLab
    } // main
    
    // postcondition: take in a filename (without .txt), and return a char[][]
-   public static char[][] buildCharArr(String fileName)
+   public static char[][] buildCharArr(String fileName) throws FileNotFoundException
    {
-      return null;//remove this line
+      Scanner sc = new Scanner(new File("C:\\Users\\samue\\Homework for CSAB\\src\\" +fileName +".txt"));
+      char[][] mazeArea = new char[sc.nextInt()][sc.nextInt()];
+      for(int i = 0; i < mazeArea.length; i++) {
+         String row = sc.next();
+         mazeArea[i] = row.toCharArray();
+      }
+      return mazeArea;
    }  // buildCharArr
    
    private static void transfer2DGridToFile (char [][] m) throws FileNotFoundException
@@ -81,8 +87,7 @@ public class Pd6SamuelPrudencioMazeLab
 }  // Pd6SamuelPrudencioMazeLab
 
 
-class Maze
-{
+class Maze {
    //Constants
    private final char WALL = 'W';
    private final char DOT = '.';
@@ -92,80 +97,127 @@ class Maze
    //fields
    private char[][] maze;
    private int startRow, startCol;  // store where the start location is
-   private boolean S_Exists=false, E_Exists=false;
-   
-   /** Initializes all the field of a Maze object: maze, startRow, startCol
-   */
-   public Maze(char[][] inCharArr)    
-   {
-      
-   }  // Maze
-   
+   private boolean S_Exists = false, E_Exists = false;
+
    /**
-   */
-   public void display()
-   {
-      if(maze==null) 
+    * Initializes all the field of a Maze object: maze, startRow, startCol
+    */
+   public Maze(char[][] inCharArr) {
+      this.maze = inCharArr;
+      for (int i = 0; i < maze.length; i++) {
+         for (int j = 0; j < maze[i].length; j++) {
+            if (maze[i][j] == this.START) {
+               this.S_Exists = true;
+               this.startRow = i;
+               this.startCol = j;
+            }
+            if (maze[i][j] == this.EXIT) {
+               this.E_Exists = true;
+            }
+         }
+      }
+   }  // Maze
+
+   /**
+    *
+    */
+   public void display() {
+      if (maze == null)
          return;
-      for(int a = 0; a<maze.length; a++)
-      {
-         for(int b = 0; b<maze[0].length; b++)
-         {
+      for (int a = 0; a < maze.length; a++) {
+         for (int b = 0; b < maze[0].length; b++) {
             System.out.print(maze[a][b]);
          }
          System.out.println("");
       }
       System.out.println("");
    }  // display
-   
-   
+
    /**
-   */
-   public void solve(int n)
-   {
+    *
+    */
+   public void solve(int n) {
       final int FIND_PATH = 1;
       final int FIND_PATH_AND_COUNT_PATH_LENGTH = 2;
       final int QUIT = 3;
-   
-      if(n == FIND_PATH)
-      {
+
+      if (n == FIND_PATH) {
          if (!markTheCorrectPath(startRow, startCol))
-            System.out.println ("No Path found!");
-      }
-      else if(n == FIND_PATH_AND_COUNT_PATH_LENGTH)
-      {
+            System.out.println("No Path found!");
+      } else if (n == FIND_PATH_AND_COUNT_PATH_LENGTH) {
          if (!markCorrectPathAndCountStars(startRow, startCol, 0))
-            System.out.println ("No Path found!");
-      
-      }
-      else if (n == QUIT)
-      {
-         System.out.println("Goodbye!\n"); 
-         System.exit (0);
-      }
-        
-      else System.out.println("Invalid choice\n");
+            System.out.println("No Path found!");
+      } else if (n == QUIT) {
+         System.out.println("Goodbye!\n");
+         System.exit(0);
+      } else System.out.println("Invalid choice\n");
    }  // solve
-   
+
    /**
-     precondition:
-     postcondition:
+    * precondition: r and c should be the location of S when first called
+    * postcondition: Will mark a path that leads to E
     */
    /*  Recur until you find E, then mark the True path */
-   private boolean markTheCorrectPath(int r, int c)
-   {
+   private boolean markTheCorrectPath(int r, int c) {
+      //checks bounds
+      if (r < 0 || r >= maze.length || c < 0 || c >= maze[0].length) {
+         return false;
+      }
+
+      //path has already filled
+      if (maze[r][c] == STEP) {
+         return false;
+      }
+
+      //do not fill these tiles
+      if (maze[r][c] == WALL) {
+         return false;
+      }
+
+      if (maze[r][c] == EXIT) {
+         return true;
+      }
+
+      maze[r][c] = STEP;
+      int[][] recur = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+
+      //recurs fill to replace the characters
+      for (int[] tracker : recur) {
+         if (markTheCorrectPath(r + tracker[0], c + tracker[1])) {
+            return true;
+         }
+         else
+         {
+
+         }
+      }
       return false;
    } // markTheCorrectPath
 
-   
    /**
-     precondition:
-     postcondition:
+    * precondition:
+    * postcondition:
     */
-   private boolean markCorrectPathAndCountStars(int r, int c, int count)
-   {
+   private boolean markCorrectPathAndCountStars(int r, int c, int count) {
+      if (markTheCorrectPath(r, c)) {
+         for (int a = 0; a < maze.length; a++) {
+            for (int b = 0; b < maze[0].length; b++) {
+               if (maze[a][b] == STEP) {
+                  count++;
+               }
+            }
+         }
+         return true;
+      }
       return false;
    } // markCorrectPathAndCountStars
-   
-
 }
+/*
+ | | Main (Partially)
+ |*| buildCharArr
+ |*| Maze default constructor
+ |*| display
+ |*| solve
+ | | markTheCorrectPath (WORKS BUT MUST BE MADE MORE EFFICIENT)
+ | | markCorrectPathAndCountStars (Uses MTCP, so it has the same problem lol)
+ */

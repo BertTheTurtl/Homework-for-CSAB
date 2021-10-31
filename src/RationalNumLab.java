@@ -73,24 +73,36 @@ class RationalNum
    //add method
    public String add(RationalNum other)
    {
-      
+      /*
+      This does not work:
+       */
+      return "";
    }
    
    //subtract method
    public String subtract(RationalNum other)
    {
-      
+      /*
+      This does not work:
+       */
+      return "";
    }
    
    //multiply method
    public String multiply(RationalNum other)
    {
-      
+      /*
+      This does not work:
+       */
+      return "";
    }
    //divide method
    public String divide(RationalNum other)
    {
-      
+      /*
+      This does not work:
+       */
+      return "";
    }
    
    //equals method
