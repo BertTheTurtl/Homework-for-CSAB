@@ -1,19 +1,18 @@
 /*********************************************************************************
 NAME: Samuel Prudencio
 PERIOD: 6
-DATE SUBMITTED: 
+DATE SUBMITTED: 10/30/2021
 DUE DATE: 10/16/2021
 ASSIGNMENT: Maze Lab
 
 PURPOSE OF THE LAB: Solving mazes
 
 MISTAKES:
-
 NEW CONCEPTS LEARNED:
 HOW I FEEL ABOUT THIS LAB: 
 CREDITS: 
 
-STUDENTS WHOM I HELPED: 
+STUDENTS WHOM I HELPED: N/A
 */
 
 import java.util.*;
