@@ -125,12 +125,17 @@ public class ListNode <E extends Comparable>
     
     public ListNode <E> deleteLastRecursively (ListNode <E> h)
     {
-    
+        if (h.getNext() == null)
+            h.setNext() = null;
+        deleteLastRecursively(h.getNext());
     }
     
     public ListNode <E> addLastRecursively (ListNode <E> h, E item)
     {
-    
+        if (h == null)
+            return new ListNode <E> (item, null);
+        h.setNext(addLastRecursively(h.getNext(), item));
+        return h;
     }
     
     public ListNode <E> appendRecursively (ListNode <E> h, ListNode <E> q)
@@ -149,19 +154,35 @@ public class ListNode <E extends Comparable>
     
     public void printIteratively (ListNode <E> h)
     {
-    
+        while (h != null)
+        {
+            System.out.print(h.getValue());
+            h.getNext();
+        }
     }
     
     public int lengthIteratively (ListNode <E> h)
     {
-    
+        int i = 0;
+        
+        while (h != null)
+        {
+            i++;
+            h.getNext();
+        }
     }
 
     //returns the pointer pointing at the node that contains the "value"
     //returns null is "value" is not in the list
     public ListNode <E> lookup (ListNode <E> h, E value)
     {
-    
+        while (h != null)
+        {
+            if (h.getValue() == value)
+                return h;
+            h.getNext();
+        }
+        return null;
     }
     
     //Pre-condition: "head" is the head of the singly linked list
