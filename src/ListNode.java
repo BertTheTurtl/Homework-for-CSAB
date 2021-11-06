@@ -189,7 +189,7 @@ public class ListNode <E extends Comparable>
     //returns the head of the list after "value" is deleted from head
     public ListNode <E> deleteIteratively (ListNode <E> head, E value)
     {
-    
+
     }
     
     //Pre-condition: head is the head of the sorted singly linked list
