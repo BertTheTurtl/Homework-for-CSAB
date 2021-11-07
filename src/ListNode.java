@@ -111,18 +111,16 @@ public class ListNode <E extends Comparable>
     //Post-condition: Deletes the first occurrence of "value" from h and returns the head of the new list without the item value
     public ListNode <E> deleteRecursively (ListNode <E> h, E value)
     {
-        ListNode <E> k;
         if (h == null)
             return null;
-        else if (k.getValue() == value)
+        else if (h.getValue() == value)
         {
-            k = k.getNext();
-            return k;
+            return h.getNext();
         }
         h.setNext(deleteRecursively(h.getNext(), value));
         return h;
     }
-    
+
     public ListNode <E> deleteLastRecursively (ListNode <E> h)
     {
         if (h.getNext() == null)
@@ -189,14 +187,28 @@ public class ListNode <E extends Comparable>
     //returns the head of the list after "value" is deleted from head
     public ListNode <E> deleteIteratively (ListNode <E> head, E value)
     {
+        if (head == null)
+            return null;
+        else if (head.getValue().equals(value))
+            return head.getNext();
+        else
+        {
 
+        }
     }
     
     //Pre-condition: head is the head of the sorted singly linked list
     //returns the head of the list after "value" is inserted into the list
     public ListNode <E> insertInOrderIteratively (ListNode <E> head, E value)
     {
-    
+        if (head == null)
+            return new ListNode <E> (value, null);
+        else if (head.getValue().compareTo(value) > 0)
+            return new ListNode <E> (value, head);
+        else
+        {
+            
+        }
     }
     
     //pre-condition: h is the head of the singly linked list
