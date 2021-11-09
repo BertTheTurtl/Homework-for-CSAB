@@ -16,9 +16,8 @@ public class CLLList <E>
     {
         ListNode <E> temp = head;
         
-        if (temp = null)
+        if (temp == null)
         {
-            System.out.print(temp.getValue());
             return;
         }
         
