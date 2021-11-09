@@ -1,8 +1,6 @@
-import java.util.List;
-
 public class CLLList <E extends Comparable>
 {
-    private ListNode <E> head;
+    private ListNode<E> head;
     
     public CLLList ()
     {
@@ -11,7 +9,7 @@ public class CLLList <E extends Comparable>
     
     public void insertLast (E obj)
     {
-        ListNode <E> temp = head;
+        ListNode<E> temp = head;
     
         if (temp == null)
         {
@@ -28,7 +26,7 @@ public class CLLList <E extends Comparable>
     
     public void showCLLList ()
     {
-        ListNode <E> temp = head;
+        ListNode<E> temp = head;
         
         if (temp == null)
         {
@@ -44,7 +42,7 @@ public class CLLList <E extends Comparable>
     
     public E getLast()
     {
-        ListNode <E> temp = head;
+        ListNode<E> temp = head;
     
         if (temp == null)
         {
@@ -61,7 +59,7 @@ public class CLLList <E extends Comparable>
     
     public E deleteLast()
     {
-        ListNode <E> temp = head;
+        ListNode<E> temp = head;
     
         if (temp == null)
         {
