@@ -123,7 +123,7 @@ public class ListNode<E extends Comparable>
     {
         if (h.getNext() == null)
             h.setNext(null);
-        deleteLastRecursively(h.getNext());
+        return deleteLastRecursively(h.getNext());
     }
     
     public ListNode<E> addLastRecursively (ListNode<E> h, E item)
@@ -136,12 +136,12 @@ public class ListNode<E extends Comparable>
     
     public ListNode<E> appendRecursively (ListNode<E> h, ListNode<E> q)
     {
-    
+        return null;
     }
     
     public ListNode<E> mergeRecursively (ListNode<E> list1, ListNode<E> list2)
     {
-    
+        return null;
     }
     
     /*
@@ -166,6 +166,8 @@ public class ListNode<E extends Comparable>
             i++;
             h.getNext();
         }
+        
+        return i;
     }
 
     //returns the pointer pointing at the node that contains the "value"
@@ -191,7 +193,7 @@ public class ListNode<E extends Comparable>
             return head.getNext();
         else
         {
-
+            return null;
         }
     }
     
@@ -205,7 +207,7 @@ public class ListNode<E extends Comparable>
             return new ListNode<E>(value, head);
         else
         {
-            
+            return null;
         }
     }
     
@@ -213,6 +215,6 @@ public class ListNode<E extends Comparable>
     //returns the head of the list which is a copy of h (preforming deep copy)
     public ListNode<E> copyIteratively (ListNode<E> h)
     {
-    
+        return null;
     }
 }
