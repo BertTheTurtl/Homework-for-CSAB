@@ -37,12 +37,18 @@ public class Pd6SamuelPrudencioCCListLast<E extends Comparable>
    public E removeFirst()
    {
       if (lastNode == null)
+      {
+         return null;
+      }
+      E tempReturn = lastNode.getNext().getValue();
+      lastNode.setNext(lastNode.getNext().getNext());
+      return tempReturn;
    } // removeFirst
    
    // post: returns the removed node
    public E removeLast()
    {
-      return null;
+
    }
    
    // post: returns the string representation of the circular list
