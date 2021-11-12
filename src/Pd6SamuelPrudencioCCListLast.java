@@ -77,6 +77,7 @@ public class Pd6SamuelPrudencioCCListLast<E extends Comparable>
       myList.addFirst(1);
       myList.addLast(99);
       System.out.println("The CCList: \n" + myList);
+      System.out.println(myList.size());
       myList.removeLast();
    
       System.out.println("The CCList: \n" + myList);
