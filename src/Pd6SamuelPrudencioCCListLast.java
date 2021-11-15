@@ -48,6 +48,10 @@ public class Pd6SamuelPrudencioCCListLast<E extends Comparable>
    // post: returns the removed node
    public E removeLast()
    {
+      if (lastNode == null)
+         return null;
+      if (lastNode.getNext() == lastNode)
+         return lastNode.getValue();
 
    }
    
