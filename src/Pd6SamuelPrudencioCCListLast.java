@@ -8,8 +8,8 @@ public class Pd6SamuelPrudencioCCListLast<E extends Comparable>
    
    public void addFirst(E v)
    {
-      if (lastNode == null)
-         lastNode.setNext(new ListNodeCopy<>(v, lastNode));
+      if (lastNode == null || lastNode.getNext() == null)
+         lastNode = new ListNodeCopy<>(v, lastNode);
       lastNode.setNext(new ListNodeCopy<>(v, lastNode.getNext()));
    } // addFirst
    
@@ -48,7 +48,18 @@ public class Pd6SamuelPrudencioCCListLast<E extends Comparable>
    // post: returns the removed node
    public E removeLast()
    {
-
+      if (lastNode == null)
+         return null;
+      
+      ListNodeCopy temp = lastNode;
+      while (temp.getNext() != lastNode)
+      {
+         temp = temp.getNext();
+      }
+      lastNode = temp;
+      E returnValue = lastNode.getNext().getValue();
+      lastNode.setNext(lastNode.getNext().getNext());
+      return returnValue;
    }
    
    // post: returns the string representation of the circular list
@@ -85,6 +96,7 @@ public class Pd6SamuelPrudencioCCListLast<E extends Comparable>
       System.out.println("The CCList: \n" + myList);
       System.out.println(myList.size());
       myList.removeLast();
+      myList.removeFirst();
    
       System.out.println("The CCList: \n" + myList);
       System.out.println("List Size: " + myList.size());
