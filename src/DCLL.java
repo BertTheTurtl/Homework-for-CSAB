@@ -11,7 +11,8 @@
  * What I wonder: 
  * Student(s) who helped me (to what extent): 
  *************************************************************************************************************************************************/
-public class DCLL <E>
+
+public class DCLL <E extends Comparable>
 {
    //DLL class
    private int size;
@@ -23,15 +24,17 @@ public class DCLL <E>
       post: return size*/
    public int size()
    {
-      return 0;
+      return size;
    }
-   
    
    /* appends obj to end of list; increases size;
      @return true  */
    public boolean add(E obj)
    {
-      return false;
+      
+      
+      size++;
+      return true;
    } // add
    
   
@@ -39,17 +42,19 @@ public class DCLL <E>
    	*/
    public void add(int index, E obj)
    {
+   
    } // add
    
    public E get(int index)
    {
-      return null;
+   
    } // get
    
    /* replaces obj at position index.  
    	*/
    public void set(int index, E obj)
    {
+   
    } // set
    
    /*  removes the node from position index.  decrements size.
@@ -57,7 +62,7 @@ public class DCLL <E>
     */
    public E remove(int index)
    {
-      return null;
+   
    } // remove
    
    
@@ -81,7 +86,6 @@ public class DCLL <E>
      post: return first value*/
    public E getFirst()
    {
-      return null;
    
    } // getFirst
       
@@ -90,7 +94,7 @@ public class DCLL <E>
       post: return last value */
    public E getLast()
    {
-      return null;
+   
    } // getLast
       
       
@@ -98,7 +102,7 @@ public class DCLL <E>
      post: remore first value and return that value */
    public E removeFirst()
    {
-      return null;   
+   
    } // removeFirst
       
       
@@ -106,7 +110,7 @@ public class DCLL <E>
      post: remove last value and return that value*/
    public E removeLast()
    {
-      return null;
+   
    } // removeLast
       
       
@@ -114,7 +118,17 @@ public class DCLL <E>
      post: print out the list provided*/
    public String toString()
    {
-      return null;
+      String result = "";
+      DLNode traverse = head;
+      
+      while (traverse.getNext() != head)
+      {
+         result = traverse.getValue() +", ";
+         traverse = traverse.getNext();
+      }
+      result = (String) traverse.getValue();
+      
+      return "[" +result +"]";
    } // toString
 
    public static void main(String args[])
