@@ -50,7 +50,6 @@ public class Pd6SamuelPrudencioCCListLast<E extends Comparable>
    {
       if (lastNode == null)
          return null;
-      
       ListNodeCopy temp = lastNode;
       while (temp.getNext() != lastNode)
       {
