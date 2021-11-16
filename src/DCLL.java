@@ -74,7 +74,12 @@ public class DCLL <E extends Comparable>
    /* replaces obj at position index*/
    public void set(int index, E obj)
    {
+      DLNode<E> tracker = head;
    
+      for (int i = 1; i < index; i++)
+         tracker = tracker.getNext();
+      
+      tracker.setValue(obj);
    } // set
    
    /*  removes the node from position index.  decrements size.
@@ -82,7 +87,19 @@ public class DCLL <E extends Comparable>
     */
    public E remove(int index)
    {
-   
+      if (index == 0)
+         removeFirst();
+      else if (index == size)
+         removeLast();
+      else
+      {
+         DLNode<E> tracker = head;
+         
+         for (int i = 1; i < index; i++)
+            tracker = tracker.getNext();
+         
+         
+      }
    } // remove
    
    
@@ -90,7 +107,10 @@ public class DCLL <E extends Comparable>
      */
    public void addFirst(E obj)
    {
-   
+      DLNode<E> temp = new DLNode<E>(obj, head.getPrev(), head);
+      head.getPrev().setNext(temp);
+      head.setPrev(temp);
+      head = head.getPrev();
    } // addFirst
    
 
@@ -98,7 +118,7 @@ public class DCLL <E extends Comparable>
        */
    public void addLast(E obj)
    {
-   
+      add(obj);
    } // addLast
       
       
@@ -106,7 +126,7 @@ public class DCLL <E extends Comparable>
      post: return first value*/
    public E getFirst()
    {
-   
+      return head.getValue();
    } // getFirst
       
       
@@ -114,7 +134,7 @@ public class DCLL <E extends Comparable>
       post: return last value */
    public E getLast()
    {
-   
+      return head.getPrev().getValue();
    } // getLast
       
       
@@ -234,14 +254,8 @@ class DLNode <E>
       return value;
    }
 }  // DLNode
-   
-
 
 /*
-
-
- 
-
  [Apple, Banana, Cucumber, Dumpling, Escargot]
  Size: 5
  [Apple, Banana, Dumpling, Escargot]
