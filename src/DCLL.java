@@ -32,17 +32,30 @@ public class DCLL <E extends Comparable>
    public boolean add(E obj)
    {
       DLNode <E> traverser = new DLNode<>(obj, head.getPrev(), head);
-
-      traverser.setNext(new DLNode<>(obj, head));
+      
+      head.getPrev().setNext(traverser);
+      head.setPrev(traverser);
+      
       size++;
       return true;
    } // add
-  
+   
    /* inserts obj at position index.  increments size. 
    	*/
    public void add(int index, E obj)
    {
-   
+      if (index == 0)
+         addFirst(obj);
+      else if (index == size)
+         add(obj);
+      else
+      {
+         DLNode temp = head;
+         for (int i = 0; i < index; i++)
+            temp = temp.getNext();
+         DLNode prev = temp.getPrev();
+         
+      }
    } // add
    
    public E get(int index)
