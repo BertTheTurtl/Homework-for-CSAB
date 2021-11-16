@@ -31,12 +31,12 @@ public class DCLL <E extends Comparable>
      @return true  */
    public boolean add(E obj)
    {
-      
-      
+      DLNode <E> traverser = new DLNode<>(obj, head.getPrev(), head);
+
+      traverser.setNext(new DLNode<>(obj, head));
       size++;
       return true;
    } // add
-   
   
    /* inserts obj at position index.  increments size. 
    	*/
