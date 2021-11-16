@@ -20,28 +20,25 @@ public class DCLL <E extends Comparable>
    //dummy node--very useful--simplifies the code
    private DLNode <E> head = new DLNode <E> ();    
    
-   /* pre: List is provided
-      post: return size*/
+   /* pre: List is provided | post: return size*/
    public int size()
    {
       return size;
    }
    
-   /* appends obj to end of list; increases size;
-     @return true  */
+   /* appends obj to end of list; increases size; @return true*/
    public boolean add(E obj)
    {
-      DLNode <E> traverser = new DLNode<>(obj, head.getPrev(), head);
+      DLNode <E> traverse = new DLNode<E>(obj, head.getPrev(), head);
       
-      head.getPrev().setNext(traverser);
-      head.setPrev(traverser);
+      head.getPrev().setNext(traverse);
+      head.setPrev(traverse);
       
       size++;
       return true;
    } // add
    
-   /* inserts obj at position index.  increments size. 
-   	*/
+   /* inserts obj at position index.  increments size*/
    public void add(int index, E obj)
    {
       if (index == 0)
@@ -51,20 +48,30 @@ public class DCLL <E extends Comparable>
       else
       {
          DLNode temp = head;
+         
          for (int i = 0; i < index; i++)
             temp = temp.getNext();
-         DLNode prev = temp.getPrev();
          
+         DLNode<E> prev = temp.getPrev();
+         DLNode<E> replacement = new DLNode<E>(obj, prev, temp);
+         
+         prev.setNext(replacement);
+         temp.setPrev(replacement);
+         size++;
       }
    } // add
    
    public E get(int index)
    {
-   
+      DLNode<E> tracker = head;
+      
+      for (int i = 1; i < index; i++)
+         tracker = tracker.getNext();
+      
+      return tracker.getValue();
    } // get
    
-   /* replaces obj at position index.  
-   	*/
+   /* replaces obj at position index*/
    public void set(int index, E obj)
    {
    
