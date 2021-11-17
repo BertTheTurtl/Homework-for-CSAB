@@ -1,4 +1,4 @@
-public class DLNode <E>
+public class DLNode <E extends Comparable>
 {
     private E value;
     private DLNodeCopy prev;

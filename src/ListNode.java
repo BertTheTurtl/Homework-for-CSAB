@@ -136,12 +136,31 @@ public class ListNode<E extends Comparable>
     
     public ListNode<E> appendRecursively (ListNode<E> h, ListNode<E> q)
     {
-        return null;
+        if (h == null)
+            return q;
+        else
+        {
+            h.setNext(appendRecursively(h.getNext(), q));
+            return h;
+        }
     }
     
     public ListNode<E> mergeRecursively (ListNode<E> list1, ListNode<E> list2)
     {
-        return null;
+        if (list1 == null)
+            return list2;
+        else if (list2 == null)
+            return list1;
+        else if (list1.getValue().compareTo(list2.getValue()) <= 0)
+        {
+            list1.setNext(mergeRecursively(list1.getNext(), list2));
+            return list1;
+        }
+        else
+        {
+            list2.setNext(mergeRecursively(list1, list2.getNext()));
+            return list2;
+        }
     }
     
     /*
@@ -180,7 +199,7 @@ public class ListNode<E extends Comparable>
                 return h;
             h.getNext();
         }
-        return null;
+        
     }
     
     //Pre-condition: "head" is the head of the singly linked list
@@ -193,7 +212,7 @@ public class ListNode<E extends Comparable>
             return head.getNext();
         else
         {
-            return null;
+        
         }
     }
     
@@ -207,7 +226,7 @@ public class ListNode<E extends Comparable>
             return new ListNode<E>(value, head);
         else
         {
-            return null;
+        
         }
     }
     
@@ -215,6 +234,6 @@ public class ListNode<E extends Comparable>
     //returns the head of the list which is a copy of h (preforming deep copy)
     public ListNode<E> copyIteratively (ListNode<E> h)
     {
-        return null;
+    
     }
 }
