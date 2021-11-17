@@ -1,10 +1,10 @@
 public class DLNode <E>
 {
     private E value;
-    private DLNode prev;
-    private DLNode next;
+    private DLNodeCopy prev;
+    private DLNodeCopy next;
     
-    public DLNode (E arg, DLNode <E> p, DLNode <E> n)
+    public DLNode (E arg, DLNodeCopy<E> p, DLNodeCopy<E> n)
     {
         value = arg;
         prev = p;
@@ -23,22 +23,22 @@ public class DLNode <E>
         value = arg;
     }
     
-    public void setNext (DLNode <E> arg)
+    public void setNext (DLNodeCopy<E> arg)
     {
         next = arg;
     }
     
-    public void setPrev (DLNode <E> arg)
+    public void setPrev (DLNodeCopy<E> arg)
     {
         prev = arg;
     }
     
-    public DLNode <E> getNext()
+    public DLNodeCopy<E> getNext()
     {
         return next;
     }
     
-    public DLNode <E> getPrev ()
+    public DLNodeCopy<E> getPrev ()
     {
         return prev;
     }
@@ -56,17 +56,17 @@ public class DLNode <E>
     
     }
     
-    public void moveNode (DLNode <E> t)
+    public void moveNode (DLNodeCopy<E> t)
     {
     
     }
     
-    public void insert (DLNode <E> t, Object obj)
+    public void insert (DLNodeCopy<E> t, Object obj)
     {
     
     }
     
-    public void remove (DLNode <E> t)
+    public void remove (DLNodeCopy<E> t)
     {
     
     }

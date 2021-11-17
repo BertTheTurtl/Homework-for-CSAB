@@ -18,7 +18,7 @@ public class DCLL <E extends Comparable>
    private int size;
    
    //dummy node--very useful--simplifies the code
-   private DLNode <E> head = new DLNode <E> ();    
+   private DLNodeCopy<E> head = new DLNodeCopy<E>();
    
    /* pre: List is provided | post: return size*/
    public int size()
@@ -29,7 +29,7 @@ public class DCLL <E extends Comparable>
    /* appends obj to end of list; increases size; @return true*/
    public boolean add(E obj)
    {
-      DLNode <E> traverse = new DLNode<E>(obj, head.getPrev(), head);
+      DLNodeCopy<E> traverse = new DLNodeCopy<E>(obj, head.getPrev(), head);
       
       head.getPrev().setNext(traverse);
       head.setPrev(traverse);
@@ -47,13 +47,13 @@ public class DCLL <E extends Comparable>
          add(obj);
       else
       {
-         DLNode temp = head;
+         DLNodeCopy temp = head;
          
          for (int i = 0; i < index; i++)
             temp = temp.getNext();
          
-         DLNode<E> prev = temp.getPrev();
-         DLNode<E> replacement = new DLNode<E>(obj, prev, temp);
+         DLNodeCopy<E> prev = temp.getPrev();
+         DLNodeCopy<E> replacement = new DLNodeCopy<E>(obj, prev, temp);
          
          prev.setNext(replacement);
          temp.setPrev(replacement);
@@ -63,7 +63,7 @@ public class DCLL <E extends Comparable>
    
    public E get(int index)
    {
-      DLNode<E> tracker = head;
+      DLNodeCopy<E> tracker = head;
       
       for (int i = 1; i < index; i++)
          tracker = tracker.getNext();
@@ -74,7 +74,7 @@ public class DCLL <E extends Comparable>
    /* replaces obj at position index*/
    public void set(int index, E obj)
    {
-      DLNode<E> tracker = head;
+      DLNodeCopy<E> tracker = head;
    
       for (int i = 1; i < index; i++)
          tracker = tracker.getNext();
@@ -93,21 +93,27 @@ public class DCLL <E extends Comparable>
          removeLast();
       else
       {
-         DLNode<E> tracker = head;
+         DLNodeCopy<E> tracker = head;
          
          for (int i = 1; i < index; i++)
             tracker = tracker.getNext();
          
-         
+         DLNodeCopy<E> previous = tracker.getPrev();
+         DLNodeCopy<E> next = tracker.getNext();
+
+         previous.setNext(next);
+         next.setPrev(previous);
+         size--;
       }
+
+      return null;
    } // remove
-   
-   
+
    /* inserts obj at front of list; increases size;
      */
    public void addFirst(E obj)
    {
-      DLNode<E> temp = new DLNode<E>(obj, head.getPrev(), head);
+      DLNodeCopy<E> temp = new DLNodeCopy<E>(obj, head.getPrev(), head);
       head.getPrev().setNext(temp);
       head.setPrev(temp);
       head = head.getPrev();
@@ -142,7 +148,12 @@ public class DCLL <E extends Comparable>
      post: remore first value and return that value */
    public E removeFirst()
    {
-   
+      E returnValue = head.getValue();
+
+      head = head.getNext();
+      head.setPrev(head.getPrev().getPrev());
+
+      return returnValue;
    } // removeFirst
       
       
@@ -150,7 +161,9 @@ public class DCLL <E extends Comparable>
      post: remove last value and return that value*/
    public E removeLast()
    {
-   
+      E returnValue = head.getPrev().getValue();
+      head.setPrev(head.getPrev().getPrev());
+      return returnValue;
    } // removeLast
       
       
@@ -159,14 +172,14 @@ public class DCLL <E extends Comparable>
    public String toString()
    {
       String result = "";
-      DLNode traverse = head;
+      DLNodeCopy traverse = head.getNext();
       
       while (traverse.getNext() != head)
       {
-         result = traverse.getValue() +", ";
+         result += (String) traverse.getValue() +", ";
          traverse = traverse.getNext();
       }
-      result = (String) traverse.getValue();
+      result += (String) traverse.getValue();
       
       return "[" +result +"]";
    } // toString
@@ -212,18 +225,18 @@ public class DCLL <E extends Comparable>
 }  // DCLL
 
 
-class DLNode <E>
+class DLNodeCopy<E>
 {
    private E value;
-   private DLNode prev;
-   private DLNode next;
-   public DLNode(E arg, DLNode <E> p, DLNode <E> n)
+   private DLNodeCopy prev;
+   private DLNodeCopy next;
+   public DLNodeCopy(E arg, DLNodeCopy<E> p, DLNodeCopy<E> n)
    {
       value=arg;
       prev=p;
       next=n;
    }
-   public DLNode()
+   public DLNodeCopy()
    {
       value=null;
       next=this;
@@ -233,19 +246,19 @@ class DLNode <E>
    {
       value=arg;
    }
-   public void setNext(DLNode <E> arg)
+   public void setNext(DLNodeCopy<E> arg)
    {
       next=arg;
    }
-   public void setPrev(DLNode <E> arg)
+   public void setPrev(DLNodeCopy<E> arg)
    {
       prev=arg;
    }
-   public DLNode <E> getNext()
+   public DLNodeCopy<E> getNext()
    {
       return next;
    }
-   public DLNode <E> getPrev()
+   public DLNodeCopy<E> getPrev()
    {
       return prev;
    }
