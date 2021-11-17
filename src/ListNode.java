@@ -163,6 +163,20 @@ public class ListNode<E extends Comparable>
         }
     }
     
+    public ListNode<E> reverseRecursively (ListNode<E> head)
+    {
+        if (head == null)
+            return null;
+        if (head.getNext() == null)
+            return head;
+        
+        ListNode<E> newHead = reverseRecursively(head.getNext());
+        head.getNext().setNext(head);
+        head.setNext(null);
+        
+        return newHead;
+    }
+    
     /*
     ITERATIVE ALGORITHMS FOR SINGLE LINKED LISTS:
      */
@@ -210,13 +224,12 @@ public class ListNode<E extends Comparable>
             return null;
         else if (head.getValue().equals(value))
         {
-            head = head.getNext();
-            return head;
+            return head.getNext();
         }
         else
         {
             ListNode<E> traverse = head;
-            while (traverse.getNext().getValue() != value)
+            while (traverse.getNext() != null && traverse.getNext().getValue() != value)
                 traverse = traverse.getNext();
             traverse.setNext(traverse.getNext().getNext());
             return head;
@@ -248,13 +261,12 @@ public class ListNode<E extends Comparable>
     //returns the head of the list which is a copy of h (preforming deep copy)
     public ListNode<E> copyIteratively (ListNode<E> h)
     {
-        /*THIS DOES THE OPPOSITE OF WHAT I WANT*/
         ListNode<E> traverse = h;
         ListNode<E> copy = null;
         
         while (traverse != null)
         {
-            copy = new ListNode<>(traverse.getValue(), copy);
+            copy.setNext(new ListNode<>(traverse.getValue(), null));
             traverse = traverse.getNext();
         }
         
