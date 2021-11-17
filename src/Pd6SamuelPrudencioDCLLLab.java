@@ -1,18 +1,19 @@
 /***********************************************************************************************************************************************
  * Name: Samuel Prudencio
  * Period: 6
- * Name of the Lab: DCLL
- * Purpose of the Program: 
+ * Name of the Lab: DCLL Lab
+ * Purpose of the Program: To learn how to use and traverse doubly circularly linked lists
  * Due Date: 11/16/2021
- * Date Submitted: 
- * What I learned: 
+ * Date Submitted: 11/17/2021 (1:15 AM)
+ * What I learned: How to work around dummy header nodes and how to code at one in the morning
 
- * How I feel about this lab: 
- * What I wonder: 
- * Student(s) who helped me (to what extent): 
+ * How I feel about this lab: Great, I think I fully grasp how to use DCLL
+ * What I wonder: If there is a more efficient way of doing this
+ * Student(s) who helped me (to what extent): Guru (Gave me some brainstorming tips for the add() methods) & Carson and Ethan (Persuaded me to not
+                                              delete the dummy header node because that would cause me even more work)
  *************************************************************************************************************************************************/
 
-public class DCLL <E extends Comparable>
+public class Pd6SamuelPrudencioDCLLLab<E extends Comparable>
 {
    //DLL class
    private int size;
@@ -194,7 +195,7 @@ public class DCLL <E extends Comparable>
 
    public static void main(String args[])
    {
-      DCLL <String> list = new DCLL <> ();
+      Pd6SamuelPrudencioDCLLLab<String> list = new Pd6SamuelPrudencioDCLLLab<>();
    
       list.addLast("Apple");
       list.addLast("Banana");
