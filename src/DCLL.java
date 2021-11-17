@@ -36,6 +36,7 @@ public class DCLL <E extends Comparable>
       
       size++;
       return true;
+      /**/
    } // add
    
    /* inserts obj at position index.  increments size*/
@@ -58,6 +59,7 @@ public class DCLL <E extends Comparable>
          prev.setNext(replacement);
          temp.setPrev(replacement);
          size++;
+         /**/
       }
    } // add
    
@@ -69,6 +71,7 @@ public class DCLL <E extends Comparable>
          tracker = tracker.getNext();
       
       return tracker.getValue();
+      /**/
    } // get
    
    /* replaces obj at position index*/
@@ -80,6 +83,7 @@ public class DCLL <E extends Comparable>
          tracker = tracker.getNext();
       
       tracker.setValue(obj);
+      /**/
    } // set
    
    /*  removes the node from position index.  decrements size.
@@ -104,6 +108,7 @@ public class DCLL <E extends Comparable>
          previous.setNext(next);
          next.setPrev(previous);
          size--;
+         /**/
       }
 
       return null;
@@ -117,6 +122,7 @@ public class DCLL <E extends Comparable>
       head.getPrev().setNext(temp);
       head.setPrev(temp);
       head = head.getPrev();
+      /**/
    } // addFirst
    
 
@@ -125,6 +131,7 @@ public class DCLL <E extends Comparable>
    public void addLast(E obj)
    {
       add(obj);
+      /**/
    } // addLast
       
       
@@ -133,6 +140,7 @@ public class DCLL <E extends Comparable>
    public E getFirst()
    {
       return head.getValue();
+      /**/
    } // getFirst
       
       
@@ -141,6 +149,7 @@ public class DCLL <E extends Comparable>
    public E getLast()
    {
       return head.getPrev().getValue();
+      /**/
    } // getLast
       
       
@@ -154,6 +163,7 @@ public class DCLL <E extends Comparable>
       head.setPrev(head.getPrev().getPrev());
 
       return returnValue;
+      /**/
    } // removeFirst
       
       
@@ -164,6 +174,7 @@ public class DCLL <E extends Comparable>
       E returnValue = head.getPrev().getValue();
       head.setPrev(head.getPrev().getPrev());
       return returnValue;
+      /**/
    } // removeLast
       
       
