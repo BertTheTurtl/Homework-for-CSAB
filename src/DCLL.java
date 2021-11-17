@@ -18,7 +18,7 @@ public class DCLL <E extends Comparable>
    private int size;
    
    //dummy node--very useful--simplifies the code
-   private DLNodeCopy<E> head = new DLNodeCopy<E>();
+   private DLNodeCopy<E> head = new DLNodeCopy<>();
    
    /* pre: List is provided | post: return size*/
    public int size()
@@ -29,7 +29,7 @@ public class DCLL <E extends Comparable>
    /* appends obj to end of list; increases size; @return true*/
    public boolean add(E obj)
    {
-      DLNodeCopy<E> traverse = new DLNodeCopy<E>(obj, head.getPrev(), head);
+      DLNodeCopy<E> traverse = new DLNodeCopy<>(obj, head.getPrev(), head);
       
       head.getPrev().setNext(traverse);
       head.setPrev(traverse);
@@ -48,13 +48,13 @@ public class DCLL <E extends Comparable>
          add(obj);
       else
       {
-         DLNodeCopy temp = head;
+         DLNodeCopy<E> temp = head;
          
          for (int i = 0; i < index; i++)
             temp = temp.getNext();
          
          DLNodeCopy<E> prev = temp.getPrev();
-         DLNodeCopy<E> replacement = new DLNodeCopy<E>(obj, prev, temp);
+         DLNodeCopy<E> replacement = new DLNodeCopy<>(obj, prev, temp);
          
          prev.setNext(replacement);
          temp.setPrev(replacement);
@@ -65,7 +65,7 @@ public class DCLL <E extends Comparable>
    
    public E get(int index)
    {
-      DLNodeCopy<E> tracker = head;
+      DLNodeCopy<E> tracker = head.getNext();
       
       for (int i = 1; i < index; i++)
          tracker = tracker.getNext();
@@ -77,7 +77,7 @@ public class DCLL <E extends Comparable>
    /* replaces obj at position index*/
    public void set(int index, E obj)
    {
-      DLNodeCopy<E> tracker = head;
+      DLNodeCopy<E> tracker = head.getNext();
    
       for (int i = 1; i < index; i++)
          tracker = tracker.getNext();
@@ -97,18 +97,19 @@ public class DCLL <E extends Comparable>
          removeLast();
       else
       {
-         DLNodeCopy<E> tracker = head;
+         DLNodeCopy<E> tracker = head.getNext();
          
          for (int i = 1; i < index; i++)
             tracker = tracker.getNext();
          
+         E value = tracker.getValue();
          DLNodeCopy<E> previous = tracker.getPrev();
          DLNodeCopy<E> next = tracker.getNext();
 
          previous.setNext(next);
          next.setPrev(previous);
          size--;
-         /**/
+         return value;
       }
 
       return null;
@@ -118,20 +119,15 @@ public class DCLL <E extends Comparable>
      */
    public void addFirst(E obj)
    {
-      DLNodeCopy<E> temp = new DLNodeCopy<E>(obj, head.getPrev(), head);
-      head.getPrev().setNext(temp);
-      head.setPrev(temp);
-      head = head.getPrev();
+      DLNodeCopy<E> temp = new DLNodeCopy<>(obj, head, head.getNext());
+      head.setNext(temp);
       /**/
    } // addFirst
-   
 
-   /* appends obj to end of list; increases size;
-       */
+   /* appends obj to end of list; increases size;*/
    public void addLast(E obj)
    {
       add(obj);
-      /**/
    } // addLast
       
       
@@ -139,7 +135,7 @@ public class DCLL <E extends Comparable>
      post: return first value*/
    public E getFirst()
    {
-      return head.getValue();
+      return head.getNext().getValue();
       /**/
    } // getFirst
       
@@ -172,6 +168,7 @@ public class DCLL <E extends Comparable>
    public E removeLast()
    {
       E returnValue = head.getPrev().getValue();
+      head.getPrev().getPrev().setNext(head);
       head.setPrev(head.getPrev().getPrev());
       return returnValue;
       /**/
@@ -183,11 +180,11 @@ public class DCLL <E extends Comparable>
    public String toString()
    {
       String result = "";
-      DLNodeCopy traverse = head.getNext();
+      DLNodeCopy<E> traverse = head.getNext();
       
       while (traverse.getNext() != head)
       {
-         result += (String) traverse.getValue() +", ";
+         result += traverse.getValue() +", ";
          traverse = traverse.getNext();
       }
       result += (String) traverse.getValue();
@@ -197,7 +194,7 @@ public class DCLL <E extends Comparable>
 
    public static void main(String args[])
    {
-      DCLL <String> list = new DCLL <String> ();	
+      DCLL <String> list = new DCLL <> ();
    
       list.addLast("Apple");
       list.addLast("Banana");
@@ -239,8 +236,8 @@ public class DCLL <E extends Comparable>
 class DLNodeCopy<E>
 {
    private E value;
-   private DLNodeCopy prev;
-   private DLNodeCopy next;
+   private DLNodeCopy<E> prev;
+   private DLNodeCopy<E> next;
    public DLNodeCopy(E arg, DLNodeCopy<E> p, DLNodeCopy<E> n)
    {
       value=arg;
