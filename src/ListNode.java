@@ -134,14 +134,14 @@ public class ListNode<E extends Comparable>
         return h;
     }
     
-    public ListNode<E> appendRecursively (ListNode<E> h, ListNode<E> q)
+    public ListNode<E> appendRecursively (ListNode<E> list1, ListNode<E> list2)
     {
-        if (h == null)
-            return q;
+        if (list1 == null)
+            return list2;
         else
         {
-            h.setNext(appendRecursively(h.getNext(), q));
-            return h;
+            list1.setNext(appendRecursively(list1.getNext(), list2));
+            return list1;
         }
     }
     
@@ -199,7 +199,7 @@ public class ListNode<E extends Comparable>
                 return h;
             h.getNext();
         }
-        
+        return null;
     }
     
     //Pre-condition: "head" is the head of the singly linked list
@@ -209,10 +209,17 @@ public class ListNode<E extends Comparable>
         if (head == null)
             return null;
         else if (head.getValue().equals(value))
-            return head.getNext();
+        {
+            head = head.getNext();
+            return head;
+        }
         else
         {
-        
+            ListNode<E> traverse = head;
+            while (traverse.getNext().getValue() != value)
+                traverse = traverse.getNext();
+            traverse.setNext(traverse.getNext().getNext());
+            return head;
         }
     }
     
@@ -226,7 +233,14 @@ public class ListNode<E extends Comparable>
             return new ListNode<E>(value, head);
         else
         {
-        
+            ListNode<E> temp = head;
+            while (temp.getNext().getValue().compareTo(value) <= 0)
+            {
+                temp = temp.getNext();
+            }
+            ListNode<E> link = temp.getNext();
+            temp.setNext(new ListNode<>(value, link));
+            return head;
         }
     }
     
@@ -234,6 +248,16 @@ public class ListNode<E extends Comparable>
     //returns the head of the list which is a copy of h (preforming deep copy)
     public ListNode<E> copyIteratively (ListNode<E> h)
     {
-    
+        /*THIS DOES THE OPPOSITE OF WHAT I WANT*/
+        ListNode<E> traverse = h;
+        ListNode<E> copy = null;
+        
+        while (traverse != null)
+        {
+            copy = new ListNode<>(traverse.getValue(), copy);
+            traverse = traverse.getNext();
+        }
+        
+        return copy;
     }
 }
