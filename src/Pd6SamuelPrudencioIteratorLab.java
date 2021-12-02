@@ -40,26 +40,26 @@ public class Pd6SamuelPrudencioIteratorLab
    // post: return an ArrayList containing all the values
    public static ArrayList<Integer> createNumbers(int[] rawNumbers) 
    {
-   
+      return null;
    }
    // pre: an array of just Strings  
    // post: return an ArrayList containing all the Strings
    public static ArrayList<String> createMovies(String[] rawWords) 
    {
-   
+      return null;
    }
    
    // pre: ArrayList a is not empty and contains only Integer objects
    // post: return the number of negative values in the ArrayList a
    public static int countNeg(ArrayList<Integer> a)
    {
-   
+      return 0;
    }
    // pre: ArrayList a is not empty and contains only Integer objects
    // post: return the average of all values in the ArrayList a
    public static double average(ArrayList<Integer> a)
    {
-   
+      return 0.0;
    }
    
    // NOTE: in this method, you must use an iterator, NO for-each loop
@@ -67,7 +67,7 @@ public class Pd6SamuelPrudencioIteratorLab
    // post: replaces all negative values with 0 
    public static ArrayList<Integer> replaceNeg(ArrayList<Integer> a)
    {
-   
+      return null;
    }
    
    // NOTE: in this method, you must use an iterator, NO for-each loop
@@ -75,14 +75,14 @@ public class Pd6SamuelPrudencioIteratorLab
    // post: deletes all zeros in the ArrayList a
    public static ArrayList<Integer> deleteZero(ArrayList<Integer> a)
    {
-   
+      return null;
    }
    // pre: ArrayList a is not empty and contains only String objects
    // post: return ArrayList without duplicate movie titles
 	// strategy: start with an empty array and add movies as needed
    public static ArrayList<String> removeDupes(ArrayList<String> a)
    {
-   
+      return null;
    }
    
 }
