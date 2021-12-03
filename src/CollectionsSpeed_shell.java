@@ -40,18 +40,18 @@
    /* add 10000 new objects at position 0  */
        public static double timeAddFirst(List<Integer> list)
       {
-   
+         return 0.0;
       }
    /* add 10000 new objects at position list.size() */
        public static double timeAddLast(List<Integer> list)
       {
-
+         return 0.0;
       }
    /* add 10000 new objects at the end. 
       Uses the LinkedList method addLast(). 
 		You must cast List list into a LinkedList.     */
        public static double timeAddLastLL(List<Integer> list)
       {
-
+         return 0.0;
       }
    }
