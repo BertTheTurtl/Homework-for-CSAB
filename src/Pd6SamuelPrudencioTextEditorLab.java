@@ -30,20 +30,38 @@ public class Pd6SamuelPrudencioTextEditorLab
    //post: edits a String according to certain characters it contains and prints the resulted string
    public static void editText(String s)
    {
-      Stack<Character> text = new Stack<Character>();
-      // your code goes here
+      Stack<Character> text = new Stack<>();
       
-            
-            
+      for (int i = 0; i < s.length(); i++)
+      {
+         text.push(s.charAt(i));
+
+         if (s.charAt(i) == '-' && !text.isEmpty())
+         {
+            text.pop();
+            text.pop();
+         }
+         if (s.charAt(i) == '$' && !text.isEmpty())
+         {
+            while (!text.isEmpty())
+               text.pop();
+         }
+      }
+      
       printStack(text);
    }//editText
    
    //pre:  none
    //post: prints the Stack in a nicer format, ex. abc instead of [a, b, c]
    public static void printStack(Stack<Character> s)
-   {     
-      // your code goes here
-    
+   {
+      Stack<Character> correctOrder = new Stack<>();
+      
+      while (!s.isEmpty())
+         correctOrder.push(s.pop());
+      
+      while (!correctOrder.isEmpty())
+         System.out.print(correctOrder.pop());
    }//printStack
 }
 
