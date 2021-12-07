@@ -3,10 +3,9 @@ NAME: Samuel Prudencio
 PERIOD: 6
 DUE DATE: 12/5/2021
 ASSIGNMENT: Text Editor Lab
-PURPOSE:
-LEARNED:
--
-CREDITS:
+PURPOSE: To get used to using Stacks
+LEARNED: How to utilize the push() & pop() methods
+CREDITS: I did not ask anybody for help
 ****************************************************************************************************************/
 import java.util.*;
 public class Pd6SamuelPrudencioTextEditorLab
