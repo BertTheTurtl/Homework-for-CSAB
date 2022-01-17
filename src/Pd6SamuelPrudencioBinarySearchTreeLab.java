@@ -86,7 +86,7 @@ class BinarySearchTree <E extends Comparable>
       {
          if (t.getLeft() == null)
          {
-            t.setLeft(new TreeNode <E> (s, null, null));
+            t.setLeft(new TreeNode<>(s, null, null));
             return t.getLeft();
          } else
             return insert(t.getLeft(), s);
@@ -94,7 +94,7 @@ class BinarySearchTree <E extends Comparable>
       {
          if (t.getRight() == null)
          {
-            t.setRight(new TreeNode <E> (s, null, null));
+            t.setRight(new TreeNode<>(s, null, null));
             return t.getRight();
          } else
             return insert(t.getRight(), s);
@@ -239,7 +239,7 @@ class TreeNode <E>
 
 /*
 Checklist:
-[ ] insert
+[x] insert
 [ ] display
 [x] find
 [x] min
