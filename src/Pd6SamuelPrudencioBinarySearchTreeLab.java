@@ -1,16 +1,15 @@
 /*****************************************************************************************************************
-NAME:      
-PERIOD:
-DUE DATE: 
+NAME: Samuel Prudencio
+PERIOD: 6
+DUE DATE: 1/17/2021
 
-PURPOSE:    
+PURPOSE: To create a Binary Search Tree
 
 WHAT I LEARNED:   
 
 HOW I FEEL ABOUT THIS LAB: 
             
-CREDITS (BE SPECIFIC: FRIENDS, PEERS, ONLINE WEBSITE): 
-
+CREDITS (BE SPECIFIC: FRIENDS, PEERS, ONLINE WEBSITE):
 ****************************************************************************************************************/
 import java.util.Scanner;
 	/****************************************************************
@@ -21,7 +20,7 @@ import java.util.Scanner;
 	for it.  Display the tree's minimum and maximum values.  Print 
 	the data in order from smallest to largest.
 	*****************************************************************/
-public class BinarySearchTree_SHELL
+public class Pd6SamuelPrudencioBinarySearchTreeLab
 {
    public static void main(String[] args)
    {   
@@ -120,6 +119,18 @@ class BinarySearchTree <E extends Comparable>
    // helper method of find
    private boolean find (TreeNode <E> t, E x)
    {
+      TreeNode <E> p =t;
+      if (p == null)
+         return false;
+      while (p != null)
+      {
+         if (p.getValue().compareTo(x) == 0)
+            return true;
+         if (p.getValue().compareTo(x) < 0)
+            p = p.getLeft();
+         if (p.getValue().compareTo(x) > 0)
+            p = p.getRight();
+      }
       return false;
    }
    
