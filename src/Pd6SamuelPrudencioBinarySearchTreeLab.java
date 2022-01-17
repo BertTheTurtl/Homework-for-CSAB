@@ -82,7 +82,23 @@ class BinarySearchTree <E extends Comparable>
    
    private TreeNode <E> insert(TreeNode <E> t, E s)
    {
-      return null;      
+      if (t.getValue().compareTo(s) <= 0)
+      {
+         if (t.getLeft() == null)
+         {
+            t.setLeft(new TreeNode <E> (s, null, null));
+            return t.getLeft();
+         } else
+            return insert(t.getLeft(), s);
+      } else
+      {
+         if (t.getRight() == null)
+         {
+            t.setRight(new TreeNode <E> (s, null, null));
+            return t.getRight();
+         } else
+            return insert(t.getRight(), s);
+      }
    } // insert
 
    
