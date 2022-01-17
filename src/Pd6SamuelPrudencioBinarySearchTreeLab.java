@@ -141,7 +141,10 @@ class BinarySearchTree <E extends Comparable>
    	***************************************************************/
    public  E min()              // you might need to write a helper method for min
    {
-      return null;
+      TreeNode <E> traverse = root;
+      while (traverse.getLeft() != null)
+         traverse = traverse.getLeft();
+      return traverse.getValue();
    }
    
    /*****************************************************************
@@ -150,7 +153,14 @@ class BinarySearchTree <E extends Comparable>
     *****************************************************************/
    public  E max()              // you might need to write a helper method for max
    {
-      return null;
+      return max(root);
+   }
+
+   public E max(TreeNode <E> t)
+   {
+      if (t.getRight() == null)
+         return t.getValue();
+      return max(t.getRight());
    }
    
    public  void smallToLarge()  // need a helper method as well?
@@ -210,3 +220,13 @@ class TreeNode <E>
       right = theNewRight;
    }
 }
+
+/*
+Checklist:
+[ ] insert
+[ ] display
+[x] find
+[x] min
+[x] max
+[ ] smallToLarge
+ */
