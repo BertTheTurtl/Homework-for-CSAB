@@ -82,6 +82,8 @@ class BinarySearchTree <E extends Comparable>
    
    private TreeNode <E> insert(TreeNode <E> t, E s)
    {
+      if (t == null)
+         return new TreeNode <E>(s, null, null);
       if (t.getValue().compareTo(s) <= 0)
       {
          if (t.getLeft() == null)
