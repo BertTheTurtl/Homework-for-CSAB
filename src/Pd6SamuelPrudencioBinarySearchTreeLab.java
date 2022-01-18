@@ -112,7 +112,11 @@ class BinarySearchTree <E extends Comparable>
    {
       if(t == null)
          return;
-      
+      display(t.getRight(), level + 1);
+      for(int k = 0; k < level; k++)
+         System.out.print("\t");
+      System.out.println(t.getValue());
+      display(t.getLeft(), level + 1);
       // your code goes here
    }
    	
@@ -181,7 +185,7 @@ class BinarySearchTree <E extends Comparable>
    
    public  void smallToLarge()  // need a helper method as well?
    {
-         
+      //System.out.print(min());
    }
 }  // BinarySearchTree
 
@@ -240,7 +244,7 @@ class TreeNode <E>
 /*
 Checklist:
 [x] insert
-[ ] display
+[x] display
 [x] find
 [x] min
 [x] max
