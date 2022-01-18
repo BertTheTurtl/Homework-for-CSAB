@@ -11,8 +11,11 @@ HOW I FEEL ABOUT THIS LAB:
             
 CREDITS (BE SPECIFIC: FRIENDS, PEERS, ONLINE WEBSITE):
 ****************************************************************************************************************/
+
 import java.util.Scanner;
-	/****************************************************************
+import java.util.Stack;
+
+/****************************************************************
 	Practice with a Binary Search Tree. Uses TreeNode.
     Prompt the user for an input string.  Build a Binary Search Tree 
 	using Comparables.  Display it as a sideways tree (take the code 
@@ -83,23 +86,45 @@ class BinarySearchTree <E extends Comparable>
    private TreeNode <E> insert(TreeNode <E> t, E s)
    {
       if (t == null)
-         return new TreeNode <E>(s, null, null);
-      if (t.getValue().compareTo(s) <= 0)
+      {
+         root = new TreeNode<E>(s);
+         return root;
+      }
+      if (t.getValue().compareTo(s) > 0)
       {
          if (t.getLeft() == null)
          {
-            t.setLeft(new TreeNode<>(s, null, null));
+            t.setLeft(new TreeNode<>(s));
             return t.getLeft();
          } else
-            return insert(t.getLeft(), s);
-      } else
+         {
+            insert(t.getLeft(), s);
+            return root;
+         }
+      } else if (t.getValue().compareTo(s) == 0)
+      {
+         if (t.getLeft() == null)
+         {
+            t.setLeft(new TreeNode<>(s));
+            return t.getLeft();
+         } else
+         {
+            insert(t.getLeft(), s);
+            return root;
+         }
+      }
+      
+      else
       {
          if (t.getRight() == null)
          {
-            t.setRight(new TreeNode<>(s, null, null));
+            t.setRight(new TreeNode<>(s));
             return t.getRight();
          } else
-            return insert(t.getRight(), s);
+         {
+            insert(t.getRight(), s);
+            return root;
+         }
       }
    } // insert
 
@@ -141,16 +166,16 @@ class BinarySearchTree <E extends Comparable>
    // helper method of find
    private boolean find (TreeNode <E> t, E x)
    {
-      TreeNode <E> p =t;
+      TreeNode <E> p = t;
       if (p == null)
          return false;
       while (p != null)
       {
          if (p.getValue().compareTo(x) == 0)
             return true;
-         if (p.getValue().compareTo(x) < 0)
-            p = p.getLeft();
          if (p.getValue().compareTo(x) > 0)
+            p = p.getLeft();
+         if (p.getValue().compareTo(x) < 0)
             p = p.getRight();
       }
       return false;
@@ -163,7 +188,12 @@ class BinarySearchTree <E extends Comparable>
    	***************************************************************/
    public  E min()              // you might need to write a helper method for min
    {
-      TreeNode <E> traverse = root;
+      return min(root);
+   }
+   
+   private E min(TreeNode <E> t)
+   {
+      TreeNode <E> traverse = t;
       while (traverse.getLeft() != null)
          traverse = traverse.getLeft();
       return traverse.getValue();
@@ -187,7 +217,19 @@ class BinarySearchTree <E extends Comparable>
    
    public  void smallToLarge()  // need a helper method as well?
    {
+      smallToLarge(root);
       //System.out.print(min());
+   }
+   
+   private void smallToLarge(TreeNode <E> t)
+   {
+      if (t == null)
+      {
+         return;
+      }
+      smallToLarge(t.getLeft());
+      System.out.print(t.getValue());
+      smallToLarge(t.getRight());
    }
 }  // BinarySearchTree
 
