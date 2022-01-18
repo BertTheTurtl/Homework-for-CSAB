@@ -5,15 +5,17 @@ DUE DATE: 1/17/2021
 
 PURPOSE: To create a Binary Search Tree
 
-WHAT I LEARNED:   
+WHAT I LEARNED: How to creatively use recursion to get around unnecessary work
 
-HOW I FEEL ABOUT THIS LAB: 
+HOW I FEEL ABOUT THIS LAB: It gave me a headache, but I feel good about it
             
-CREDITS (BE SPECIFIC: FRIENDS, PEERS, ONLINE WEBSITE):
+CREDITS (BE SPECIFIC: FRIENDS, PEERS, ONLINE WEBSITE): Ethan South (helped me see that using a Stack for
+                                                       smallToLarge was unnecessary work and helped me visualize
+                                                       the recursive solution) & Guru Uppala (guided me to
+                                                       figuring out the display method)
 ****************************************************************************************************************/
 
 import java.util.Scanner;
-import java.util.Stack;
 
 /****************************************************************
 	Practice with a Binary Search Tree. Uses TreeNode.
