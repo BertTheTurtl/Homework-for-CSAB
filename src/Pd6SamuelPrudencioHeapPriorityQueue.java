@@ -25,9 +25,7 @@ public class Pd6SamuelPrudencioHeapPriorityQueue<E extends Comparable <E>>
    
    public boolean isEmpty()
    {
-      // your code goes here    
-      return false;  
-   
+      return numItems == 0;
    }
    
    public E peek()
@@ -66,3 +64,15 @@ public class Pd6SamuelPrudencioHeapPriorityQueue<E extends Comparable <E>>
    
    }
 }  //Pd6SamuelPrudencioHeapPriorityQueue
+
+/*
+TO-DO LIST:
+[ ] Non-default constructor
+[x] isEmpty()
+[x] peek()
+[ ] remove()
+[ ] add()
+[ ] reheapDown
+[ ] reheapUp
+[ ] doubleCapacity()
+ */
