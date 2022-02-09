@@ -19,8 +19,20 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
    {
       // Create a HeapPriorQueue object to test all the methods in this class
       Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<Integer> pq = new Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<>();
-                
-      // your code goes here
+   
+      pq.add(1);
+      pq.add(4);
+      pq.add(7);
+      pq.add(9);
+      System.out.println(pq);
+   
+      pq.remove();
+      System.out.println(pq);
+   
+      System.out.println(pq.peek());
+      System.out.println(pq.isEmpty());
+   
+      System.out.println(pq);
    }
    
    public Pd6SamuelPrudencioHeapOneDArray_PriorityQueue()
@@ -35,11 +47,12 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
    
    public Pd6SamuelPrudencioHeapOneDArray_PriorityQueue(int initialCapacity)
    {
-          // your code goes here
+      items = new Comparable [initialCapacity];
+      numItems = 0;
    }
     
-   // precondition:
-   // postcondition:
+   // precondition: None
+   // postcondition: Returns whether the list is empty
 
    public boolean isEmpty()
    {
@@ -56,28 +69,30 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
       return null;
    }
    
-   // precondition:
-   // postcondition:
+   // precondition: items is not null
+   // postcondition: Removes the root and then organizes everything in heap order
 
    public E remove()
    {
       E result = (E) items[1];
-
-      return null;  
+      items[1] = items[numItems];
+      items[numItems] = null;
+      reheapDown(1);
+      numItems--;
+      return result;
    }
    
-   // precondition:
-   // postcondition:   
+   // precondition: Give an E obj to be added at the end
+   // postcondition: return true when adds to heap
 
    public boolean add(E obj)
    {
       numItems++;
-      Comparable[] newList = new Comparable [numItems + 1];
-      newList[1] = obj;
-
-
-      // your code goes here
-      return false;
+      if (numItems >= items.length)
+         doubleCapacity();
+      items[numItems] = obj;
+      reheapUp();
+      return true;
    } // add
       
    // precondition: None
@@ -85,21 +100,32 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
 
    public String toString ()
    {
-      Comparable[] copy = items;
       String result = "";
 
-      for (Comparable x: copy) {
+      for (Comparable x: items) {
          result += x +" ";
       }
       return result;
    }
    
-   // precondition:
-   // postcondition:
+   // precondition: A given index of which Comparable object is being moved
+   // postcondition: Swapped the current index with it's smallest child and recursively continuing until heap order is maintained
 
    private void reheapDown(int index)
    {
-
+      int leftChild = index * 2;
+      int rightChild = (index * 2) + 1;
+      int smallChild = leftChild;
+   
+      if(items[rightChild] != null && items[rightChild].compareTo(items[leftChild]) < 0 )
+      {
+         smallChild = rightChild;
+      }
+      if(items[smallChild].compareTo(items[index]) > 0)
+      {
+         swap(index, smallChild);
+         reheapDown(smallChild);
+      }
    }
    
    // precondition:
@@ -107,28 +133,45 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
 
    private void reheapUp()
    {
-
+      int current = numItems;
+      int parent = current / 2;
+      while (items[parent].compareTo(items[current]) > 0)
+      {
+         swap(parent, current);
+         current = current / 2;
+         parent = current / 2;
+      }
    }
    
-   // precondition:
-   // postcondition:   
+   private void swap(int root, int replacementChild)
+   {
+      Comparable temp = items[root];
+      items[root] = items[replacementChild];
+      items[replacementChild] = temp;
+   }
+   
+   // precondition: None
+   // postcondition: Doubles the size of the list when needed
 
    private void doubleCapacity()
    {
-   
+      Comparable[] newList = new Comparable[numItems * 2];
+      for (int i = 1; i < numItems; i++)
+         newList[i] = items[i];
+      items = newList;
    }
-     
 }  //HeapPriorityQueue_shell
 
 /*
 TO-DO LIST:
-[ ] Non-default constructor
+[x] Non-default constructor
 [x] isEmpty()
 [x] peek()
-[ ] remove()
-[ ] add()
-[ ] reheapDown()
+[x] remove()
+[x] add()
+[x] reheapDown()
 [ ] reheapUp()
-[ ] doubleCapacity()
+[x] doubleCapacity()
 [x] toString()
+[x] swap()
 */
