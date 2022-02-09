@@ -133,8 +133,8 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
       }
    }
    
-   // precondition:
-   // postcondition:   
+   // precondition: None
+   // postcondition: Will reshuffle the heap to maintain heap order
 
    private void reheapUp()
    {
@@ -150,6 +150,9 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
             parent = current;
       }
    }
+   
+   //Precondition: Needs two indexes to swap
+   //Postcondition: Swaps the two indexes
    
    private void swap(int root, int replacementChild)
    {
@@ -174,15 +177,10 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
 }  //HeapPriorityQueue_shell
 
 /*
-TO-DO LIST:
-[x] Non-default constructor
-[x] isEmpty()
-[x] peek()
-[x] remove()
-[x] add()
-[x] reheapDown()
-[ ] reheapUp()
-[x] doubleCapacity()
-[x] toString()
-[x] swap()
+Output:
+1 7 4 9 52 20 5 32 12
+4 7 5 9 52 20 12 32
+4
+false
+4 7 5 9 52 20 12 32
 */
