@@ -17,11 +17,10 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
   
    public static void main (String [] args)
    {
-      // Create a HeapPriorQueue_shell object to test all the methods in this class
+      // Create a HeapPriorQueue object to test all the methods in this class
       Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<Integer> pq = new Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<>();
                 
       // your code goes here
-
    }
    
    public Pd6SamuelPrudencioHeapOneDArray_PriorityQueue()
@@ -38,8 +37,6 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
    {
           // your code goes here
    }
-   
-
     
    // precondition:
    // postcondition:
@@ -49,8 +46,8 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
       return numItems == 0;
    }
    
-   // precondition:
-   // postcondition:   
+   // precondition: None
+   // postcondition: returns first item in the list
 
    public E peek()
    {
@@ -64,7 +61,8 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
 
    public E remove()
    {
-      // your code goes here    
+      E result = (E) items[1];
+
       return null;  
    }
    
@@ -73,16 +71,27 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
 
    public boolean add(E obj)
    {
-      // your code goes here    
+      numItems++;
+      Comparable[] newList = new Comparable [numItems + 1];
+      newList[1] = obj;
+
+
+      // your code goes here
       return false;
    } // add
       
-   // precondition:
-   // postcondition:
+   // precondition: None
+   // postcondition: Prints out the contents of the Heap
 
    public String toString ()
    {
-      return null;
+      Comparable[] copy = items;
+      String result = "";
+
+      for (Comparable x: copy) {
+         result += x +" ";
+      }
+      return result;
    }
    
    // precondition:
@@ -121,5 +130,5 @@ TO-DO LIST:
 [ ] reheapDown()
 [ ] reheapUp()
 [ ] doubleCapacity()
-[ ] toString()
+[x] toString()
 */
