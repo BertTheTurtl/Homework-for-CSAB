@@ -1,11 +1,13 @@
 /**************************************************************************************
  Name: Samuel Prudencio
  Date: 2/8/2022
- What I learned:
- How I feel about this lab:
+ What I learned: How to use heapUp and heapDown to aid in maintaining heap order
+ How I feel about this lab: Decently confident, I understand how to do it
 
- I am wondering (the what-if moment):
- Credits: Guru Uppala
+ I am wondering (the what-if moment): I am wondering if there are more efficient ways of
+                                      completing the lab.
+ Credits: Guru Uppala helped me with understanding what to do conceptually and Abhinav
+          Potluri helped me with debugging
 ***************************************************************************************/
 
 public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable <E>>
@@ -40,8 +42,6 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
        // your code goes here
        items = (new Comparable [] {0,5,12,20,32,52});  // a min-heap
        numItems = 5;
-       for (Comparable v: items)
-          System.out.print (v + " "); 
    } 
    
    
@@ -102,8 +102,8 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
    {
       String result = "";
 
-      for (Comparable x: items) {
-         result += x +" ";
+      for (int i = 1; i <= numItems; i++) {
+         result += items[i] +" ";
       }
       return result;
    }
@@ -117,11 +117,16 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
       int rightChild = (index * 2) + 1;
       int smallChild = leftChild;
    
+      if (leftChild > numItems || rightChild > numItems)
+      {
+         return;
+      }
+      
       if(items[rightChild] != null && items[rightChild].compareTo(items[leftChild]) < 0 )
       {
          smallChild = rightChild;
       }
-      if(items[smallChild].compareTo(items[index]) > 0)
+      if(items[smallChild].compareTo(items[index]) < 0)
       {
          swap(index, smallChild);
          reheapDown(smallChild);
@@ -158,9 +163,12 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
 
    private void doubleCapacity()
    {
-      Comparable[] newList = new Comparable[numItems * 2];
+      Comparable[] newList = new Comparable[numItems * 2 - 1];
+      newList[0] = 0;
+      
       for (int i = 1; i < numItems; i++)
          newList[i] = items[i];
+      
       items = newList;
    }
 }  //HeapPriorityQueue_shell
