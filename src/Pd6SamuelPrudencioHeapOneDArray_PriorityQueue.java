@@ -5,7 +5,7 @@
  How I feel about this lab:
 
  I am wondering (the what-if moment):
- Credits:
+ Credits: Guru Uppala
 ***************************************************************************************/
 
 public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable <E>>
@@ -139,7 +139,10 @@ public class Pd6SamuelPrudencioHeapOneDArray_PriorityQueue<E extends Comparable 
       {
          swap(parent, current);
          current = current / 2;
-         parent = current / 2;
+         if (current / 2 > 0)
+            parent = current / 2;
+         else
+            parent = current;
       }
    }
    
