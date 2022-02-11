@@ -52,29 +52,61 @@ public class Pd6SamuelPrudencioHeapSort
    // postcondition:   
    public static void sort(double[] array)
    {
-      /* enter your code here */
       
       
-   
       if(array[1] > array[2])   //just an extra swap, if needed.
          swap(array, 1, 2);
    }
-   // precondition:
-   // postcondition:   
+   // precondition: Given an array and two indexes
+   // postcondition: Swaps the position of both items
    public static void swap(double[] array, int a, int b)
    {
-   
+      double temp = array[a];
+      array[a] = array[b];
+      array[b] = temp;
    }
    // precondition:
    // postcondition:
    public static void heapDown(double[] array, int k, int size)
    {
-   
+      int leftChild = k * 2;
+      int rightChild = (k * 2) + 1;
+      int biggerChild = leftChild;
+      
+      while(k * 2 >= size)
+      {
+         if (leftChild > size || rightChild > size)
+         {
+            return;
+         }
+      
+         if(array[rightChild] != 0 && array[rightChild] > array[leftChild])
+         {
+            biggerChild = rightChild;
+         }
+         if(array[biggerChild] > array[k])
+         {
+            swap(array, k, biggerChild);
+         }
+         
+         k = biggerChild;
+         leftChild = k * 2;
+         rightChild = (k * 2) + 1;
+         biggerChild = leftChild;
+       }
    }
-   // precondition:
-   // postcondition:
+   // precondition: A given array
+   // postcondition: Will check if the array is sorted in max heap order
    public static boolean isSorted(double[] arr)
    {
+      /*for (int i = 0; i <= (arr.length - 2) / 2; i++) {
+            if (arr[2 * i + 1] > arr[i])
+                return false;
+
+            if (2 * i + 2 < arr.length && arr[2 * i + 2] > arr[i])
+                return false;
+        }
+        return true;*/
       return false;
    }
    
@@ -101,8 +133,8 @@ To-Do List:
 
 Part 1:
 [ ] sort()
-[ ] swap()
-[ ] heapDown()
+[x] swap()
+[x] heapDown()
 [ ] isSorted()
 
 Part 2:
