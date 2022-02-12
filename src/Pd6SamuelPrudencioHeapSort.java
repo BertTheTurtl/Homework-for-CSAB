@@ -14,29 +14,29 @@
 
  Students (names) you helped (to what extent, be specific): 
  ****************************************************************************/
-
+import java.text.DecimalFormat;
 
 public class Pd6SamuelPrudencioHeapSort
 {
    public static void main(String[] args)
    {
-   //Part 1: Given a max heap, sort it. Do this part first. 
+   //Part 1: Given a max heap2, sort it. Do this part first.
       double heap[] = {-1,99,80,85,17,30,84,2,16,1};
       display(heap);
       sort(heap);
       display(heap);
       System.out.println(isSorted(heap));
    
-   //Part 2:  Generate 10 random numbers, make a heap, sort it.
+   //Part 2:  Generate 10 random numbers, make a heap2, sort it.
       int SIZE = 10;
-      double[] heap = new double[SIZE + 1];
-      heap = createRandom(heap);
-      display(heap);
-      makeHeap(heap);
-      display(heap);
-      sort(heap);
-      display(heap);
-      System.out.println(isSorted(heap));
+      double[] heap2 = new double[SIZE + 1];
+      heap2 = createRandom(heap2);
+      display(heap2);
+      makeHeap(heap2);
+      display(heap2);
+      sort(heap2);
+      display(heap2);
+      System.out.println(isSorted(heap2));
    }
    
 	//******* Part 1 ******************************************
@@ -44,8 +44,9 @@ public class Pd6SamuelPrudencioHeapSort
    // postcondition: Prints out the array
    public static void display(double[] array)
    {
+      DecimalFormat d = new DecimalFormat ("0.00");
       for(int k = 1; k < array.length; k++)
-         System.out.print(array[k] + "    ");
+         System.out.print(d.format(array[k]) + "    ");
       System.out.println("\n");	
    }
    // precondition:
@@ -115,15 +116,23 @@ public class Pd6SamuelPrudencioHeapSort
 	//Generate 100 random numbers between 1 and 100, formatted to 2 decimal places
    //postcondition:  array[0] == -1, the rest of the array is random
    public static double[] createRandom(double[] array)
-   {  
-      return null;
+   {
+      array[0] = -1;
+      for(int i = 1; i < array.length; i++)
+      {
+         array[i] = Math.random() * 100;
+      }
+      return array;
    }
    
    //Turn the random array into a MAX heap
    //postcondition:  array[0] == -1, the rest of the array is in heap-order
    private static void makeHeap(double[] array)
    {
-   
+      for(int x = array.length/2; x >= 1; x--)
+      {
+         heapDown(array, x, array.length - 1);
+      }
    }
    
 } // Pd6SamuelPrudencioHeapSort
@@ -132,13 +141,13 @@ public class Pd6SamuelPrudencioHeapSort
 To-Do List:
 
 Part 1:
-[ ] sort()
+[x] sort()
 [x] swap()
-[x] heapDown()
-[ ] isSorted()
+[ ] heapDown()
+[x] isSorted()
 
 Part 2:
-[ ] createRandom()
+[x] createRandom()
 [ ] makeHeap()
  */
 
