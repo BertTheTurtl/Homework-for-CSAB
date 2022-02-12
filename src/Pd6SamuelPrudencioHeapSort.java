@@ -3,16 +3,22 @@
  Lab Assignment: HeapSort
  Purpose of the program: To learn how to sort heaps in heap order
  
- What I Learned (be as specific as possible):
+ What I Learned: What ternary operators are and
+                 how to use heapDown() in many
+                 ways.
  
- How I feel about this lab:
+ How I feel about this lab: Pretty good, this is the first lab that I have
+                            turned in early
  
- What I am wondering:
+ What I am wondering: Why have we not learned ternary operators before?
  
  The credits: StackOverflow showed me
               what ternary operators are - https://stackoverflow.com/questions/10336899/what-is-a-question-mark-and-colon-operator-used-for
+              Guru Uppala helped me with strategizing how to conceptually
+              visualize the code.
 
- Students (names) you helped (to what extent, be specific): 
+ Students you helped: Guru Uppala and I talked through problems we were having
+                      with the code. We both began researching ternary operators.
  ****************************************************************************/
 import java.text.DecimalFormat;
 
@@ -49,8 +55,8 @@ public class Pd6SamuelPrudencioHeapSort
          System.out.print(d.format(array[k]) + "    ");
       System.out.println("\n");	
    }
-   // precondition:
-   // postcondition:   
+   // precondition: Given an array
+   // postcondition: Sorts the array in ascending order using heapDown
    public static void sort(double[] array)
    {
       for (int i = array.length - 1; i >1; i--)
@@ -58,9 +64,6 @@ public class Pd6SamuelPrudencioHeapSort
          swap(array, i, 1);
          heapDown(array, 1, i - 1);
       }
-      
-      if(array[1] > array[2])   //just an extra swap, if needed.
-         swap(array, 1, 2);
    }
    // precondition: Given an array and two indexes
    // postcondition: Swaps the position of both items
