@@ -82,13 +82,13 @@ class HashtableLinearProbe implements Hashtable
    private Object[] array;
    public HashtableLinearProbe(int size)
    {
-      // your code goes here                   
+      // your code goes here
    }
    public void add(Object obj)
    {
       int code = obj.hashCode();
       int index = Math.abs(code % array.length);
-      if (  )  //empty
+      if (true)  //empty
       {
          //insert it
          System.out.println(obj + "\t" + code + "\t" + index);
@@ -118,7 +118,7 @@ class HashtableLinearProbe implements Hashtable
       int index = Math.abs(obj.hashCode() % array.length);
       while(array[index] != null)
       {
-         if(  )  //found it
+         if(true)  //found it
          {
             
          }
@@ -128,7 +128,7 @@ class HashtableLinearProbe implements Hashtable
             System.out.println("Looking at index " + index);
          }
       } // while
-      //not found
+      return 0;//not found
    } // indexOf
 } // HashtableLinearProbe
 
@@ -149,7 +149,7 @@ class HashtableRehash implements Hashtable
    {
       int code = obj.hashCode();
       int index = Math.abs(code % array.length);
-      if(  )  //empty
+      if(true)  //empty
       {
          //insert it
          System.out.println(obj + "\t" + code + "\t" + index);
@@ -165,7 +165,7 @@ class HashtableRehash implements Hashtable
    
    public int rehash(int index)
    {
-      
+      return 0; //null
    }
    
    public  int indexOf(Object obj)
@@ -173,7 +173,7 @@ class HashtableRehash implements Hashtable
       int index = Math.abs(obj.hashCode() % array.length);
       while(array[index] != null)
       {
-         if(  )  //found it
+         if(true)  //found it
          {
             
          }
@@ -183,7 +183,7 @@ class HashtableRehash implements Hashtable
             System.out.println("Looking at index " + index);
          }
       }
-           //not found
+      return 0; //not found
    }
 } // HashTableRehash
 
@@ -207,9 +207,9 @@ class HashtableChaining implements Hashtable
    public int indexOf(Object obj)
    {
       int index = Math.abs(obj.hashCode() % array.length);
-      if( !array[index].isEmpty() )
+      if(!array[index].isEmpty())
       {
-         if(  )  //found it
+         if(true)  //found it
          {
             
          }
@@ -218,6 +218,6 @@ class HashtableChaining implements Hashtable
         
          }
       }
-             //not found
+      return 0; //not found
    } // indexOf
 } // HashtableChaining
