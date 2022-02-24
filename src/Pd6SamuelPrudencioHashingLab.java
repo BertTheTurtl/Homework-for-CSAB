@@ -221,3 +221,22 @@ class HashtableChaining implements Hashtable
       return 0; //not found
    } // indexOf
 } // HashtableChaining
+
+/*
+To-Do List:
+[ ] HashtableLinearProbe:
+     [ ] Constructor
+     [ ] linearProbe()
+     [ ] indexOf()
+[ ] HashtableRehash:
+     [ ] Constructor
+     [ ] rehash()
+     [ ] indexOf()
+[ ] HashtableChaining:
+     [ ] Constructor
+     [ ] indexOf()
+ */
+/*
+Output:
+
+ */
