@@ -73,11 +73,11 @@ class Widget implements Comparable<Widget>
    }
    public int compareTo(Widget w)
    {
-      if (this.myPounds == w.myPounds && this.myOunces == w.myOunces)
+      if (myPounds == w.myPounds && myOunces == w.myOunces)
       {
          return 0;
       }
-      else if (this.myPounds > w.myPounds && this.myOunces > w.myOunces)
+      else if (myPounds > w.myPounds || myOunces > w.myOunces)
       {
          return 1;
       }
