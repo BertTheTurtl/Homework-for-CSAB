@@ -1,6 +1,7 @@
 /*
-Name:
-What I learned:
+Name: Samuel Prudencio
+What I learned: I learned more about sets and their many uses. This is the first time I have tried using iterators on my
+own instead of being told to, I am glad I did so.
 */
 import java.util.*;
 public class Pd6SamuelPrudencioSetDriver
@@ -14,7 +15,7 @@ public class Pd6SamuelPrudencioSetDriver
       
       // use the above lists to create four MySet objects: s1, s2, s3, s4
       // Note: MySet extends HashSet which implements Set
-      MySet<Object> s1 = new MySet <>();
+      MySet<Object> s1 = new MySet<>();
       MySet s2 = new MySet();
       MySet s3 = new MySet();
       MySet s4 = new MySet();
@@ -54,37 +55,87 @@ public class Pd6SamuelPrudencioSetDriver
 // methods defined in it.
 class MySet<E> extends HashSet {
    
-   //private Set<E> set;
+   private Set<E> set;
    
    public MySet()
    {
-     
+      set = new HashSet<>();
    }
    
-   
+   //Pre-condition: Given a set
+   //Post-condition: Returns a set with the current set and given set combined
    public Set<E> union (Set<E> s)
    {
-      return null;
+      Set<E> newSet = new HashSet<>();
+      Iterator<E> iter = super.iterator();
+
+      while (iter.hasNext())
+         newSet.add(iter.next());
+      for (E i : s)
+         newSet.add(i);
+
+      return newSet;
    }
-   
+
+   //Pre-condition: Given a set
+   // Post-condition: Returns the similar values in both sets
    public Set<E> intersect (Set<E> s)
    {
-      return null;
+      Set<E> similar = new HashSet<>();
+      Iterator<E> set = super.iterator();
+
+      while (set.hasNext())
+      {
+         if (s.contains(set.next()))
+            similar.add(set.next());
+      }
+
+      return similar;
    }
-   
+
+   //Pre-condition: Given a set
+   //Post-condition: Returns the values that are in set1 that are not in set2
    public Set<E> difference (Set<E> s)
    {
-      return null;
+      Set<E> different = new HashSet<>();
+      Iterator<E> set = super.iterator();
+
+      while (set.hasNext())
+      {
+         if (!s.contains(set.next()))
+            different.add(set.next());
+      }
+
+      return different;
    }
-   
+
+   //Pre-condition: Given a set
+   //Post-condition: Returns whether all values in set1 are in set2
    public boolean subset(Set<E> s)
    {
-      return false;   
+      Iterator<E> set = super.iterator();
+
+      while (set.hasNext())
+      {
+         if (!s.contains(set.next()))
+            return false;
+      }
+
+      return true;
    }
-   
+
+   //Pre-condition: Given a new set
+   //Post-condition: Returns whether all the values in set2 are in set1
    public boolean superset(Set<E> s)
    {
-      return false;
+      for(E i : s)
+      {
+         if(!this.contains(i))
+         {
+            return false;
+         }
+      }
+      return true;
    }   
 } // MySet
 
