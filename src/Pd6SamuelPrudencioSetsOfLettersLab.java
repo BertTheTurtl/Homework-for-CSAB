@@ -14,26 +14,16 @@ public class Pd6SamuelPrudencioSetsOfLettersLab
    
    public static void fillTheSets(String fn) throws FileNotFoundException
    {
-      Scanner infile = new Scanner(new File("C:\\Users\\samue\\Homework for CSAB\\src\\" +fn));
+      Scanner infile = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\" +fn));
 
       Set<String> lowerCase = new HashSet<>();
       Set<String> upperCase = new HashSet<>();
       Set<String> other = new HashSet<>();
-
-      Set<String> commonLowerCase = new TreeSet<>();
-      Set<String> commonUpperCase = new TreeSet<>();
-      Set<String> commonOther = new TreeSet<>();
-
-      Iterator<String> lcIter = commonLowerCase.iterator();
-      Iterator<String> ucIter = commonUpperCase.iterator();
-      Iterator<String> oIiter = commonOther.iterator();
-
-      for(char c = 'a'; c <= 'z'; c++)
-          commonLowerCase.add(String.valueOf(c));
-
-      for(char c = 'A'; c <= 'Z'; c++)
-          commonUpperCase.add(String.valueOf(c));
-
+   
+      String[] commonLowerCase = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+      String[]commonUpperCase = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+      String[] commonOther = {",", ".", ":", ";"};
+      
       while (infile.hasNextLine())
       {
          String printString = infile.nextLine();
@@ -57,30 +47,50 @@ public class Pd6SamuelPrudencioSetsOfLettersLab
          System.out.println("Upper Case: " +sortedUpperCase);
          System.out.println("Other: " +sortedOther +"\n");
 
-         while (lcIter.hasNext())
+         for (int i = 0; i < commonLowerCase.length; i++)
          {
-            if (!printString.contains(lcIter.next()))
-               commonLowerCase.remove(lcIter.next());
+            if (!printString.contains(commonLowerCase[i]))
+               commonLowerCase[i] = "0";
          }
-         while (ucIter.hasNext())
+         for (int i = 0; i < commonUpperCase.length; i++)
          {
-            if (!printString.contains(ucIter.next()))
-               commonUpperCase.remove(ucIter.next());
+            if (!printString.contains(commonUpperCase[i]))
+               commonUpperCase[i] = "0";
          }
-         while (oIiter.hasNext())
+         for (int i = 0; i < commonOther.length; i++)
          {
-            if(!printString.contains(oIiter.next()))
-               commonOther.remove(oIiter.next());
+            if(!printString.contains(commonOther[i]))
+               commonOther[i] = "0";
          }
 
          lowerCase.removeAll(lowerCase);
          upperCase.removeAll(upperCase);
          other.removeAll(other);
       }
-
-      System.out.println("Common Lower Case: " +commonLowerCase);
-      System.out.println("Common Upper Case: " +commonUpperCase);
-      System.out.println("Common Other: " +commonOther);
+      
+      ArrayList<String> finishedLowerCase = new ArrayList<>();
+      ArrayList<String> finishedUpperCase = new ArrayList<>();
+      ArrayList<String> finishedOther = new ArrayList<>();
+      
+      for (int i = 0; i < commonLowerCase.length; i++)
+      {
+         if (commonLowerCase[i] != "0")
+            finishedLowerCase.add(commonLowerCase[i]);
+      }
+      for (int i = 0; i < commonUpperCase.length; i++)
+      {
+         if (commonUpperCase[i] != "0")
+            finishedUpperCase.add(commonUpperCase[i]);
+      }
+      for (int i = 0; i < commonOther.length; i++)
+      {
+         if (commonOther[i] != "0")
+            finishedOther.add(commonOther[i]);
+      }
+      
+      System.out.println("Common Lower Case: " +finishedLowerCase);
+      System.out.println("Common Upper Case: " +finishedUpperCase);
+      System.out.println("Common Other: " +finishedOther);
    }
 }
 
