@@ -20,9 +20,9 @@ public class Pd6SamuelPrudencioSetsOfLettersLab
       Set<String> upperCase = new HashSet<>();
       Set<String> other = new HashSet<>();
 
-      Set<String> commonLowerCase = new HashSet<>();
-      Set<String> commonUpperCase = new HashSet<>();
-      Set<String> commonOther = new HashSet<>();
+      Set<String> commonLowerCase = new TreeSet<>();
+      Set<String> commonUpperCase = new TreeSet<>();
+      Set<String> commonOther = new TreeSet<>();
 
       Iterator<String> lcIter = commonLowerCase.iterator();
       Iterator<String> ucIter = commonUpperCase.iterator();
