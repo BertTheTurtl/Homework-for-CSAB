@@ -14,11 +14,11 @@ public class Pd6SamuelPrudencioSetsOfLettersLab
    
    public static void fillTheSets(String fn) throws FileNotFoundException
    {
-      Scanner infile = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\" +fn));
+      Scanner infile = new Scanner(new File("C:\\Users\\samue\\Homework for CSAB\\src\\" +fn));
 
-      Set<String> lowerCase = new HashSet<>();
-      Set<String> upperCase = new HashSet<>();
-      Set<String> other = new HashSet<>();
+      Set<String> lowerCase = new TreeSet<>();
+      Set<String> upperCase = new TreeSet<>();
+      Set<String> other = new TreeSet<>();
    
       String[] commonLowerCase = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
       String[]commonUpperCase = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
@@ -39,13 +39,9 @@ public class Pd6SamuelPrudencioSetsOfLettersLab
                other.add(printString.substring(i, i+1));
          }
 
-         TreeSet sortedLowerCase = new TreeSet(lowerCase);
-         TreeSet sortedUpperCase = new TreeSet(upperCase);
-         TreeSet sortedOther = new TreeSet(other);
-
-         System.out.println("Lower Case: " +sortedLowerCase);
-         System.out.println("Upper Case: " +sortedUpperCase);
-         System.out.println("Other: " +sortedOther +"\n");
+         System.out.println("Lower Case: " +lowerCase);
+         System.out.println("Upper Case: " +upperCase);
+         System.out.println("Other: " +other +"\n");
 
          for (int i = 0; i < commonLowerCase.length; i++)
          {
