@@ -1,7 +1,7 @@
 //*********************************************************************************************************************************
-// Name:   
-// Period:                                                 
-// Date:
+// Name: Samuel Prudencio
+// Period: 6
+// Date: 3/11/2022
 // What I learned:
 // How I feel about this lab:
 // What I wonder:
@@ -9,6 +9,7 @@
 
 import java.io.*;
 import java.util.*;
+
 public class Pd6SamuelPrudencioDictionary2022
 {
    private static PrintWriter pw;
@@ -28,7 +29,7 @@ public class Pd6SamuelPrudencioDictionary2022
     
    
       Map<String, Set<String>> eng2spn = new TreeMap<String, Set<String>>();
-      Scanner infile = new Scanner(new File("spanglish.txt"));
+      Scanner infile = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\spanglish.txt"));
       while(infile.hasNext())
       {
          add(eng2spn, infile.next(), infile.next());
