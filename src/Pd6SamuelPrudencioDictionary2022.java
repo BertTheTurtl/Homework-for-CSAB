@@ -7,144 +7,157 @@
 // What I wonder:
 //***********************************************************************************************************************************
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
 public class Pd6SamuelPrudencioDictionary2022
 {
-   private static PrintWriter pw;
-   public static void main(String[] args) throws Exception
-   {
-      /***************************************************
-                        PART I
-       **************************************************/
-      try
-      {
-         // funnel all System.out.print() results to the output file "Pd6EdundLauDictionaryOutputI.txt");
-         System.setOut(new PrintStream(new FileOutputStream("Pd6SamuelPrudencioDictionaryOutputI.txt")));
-      }
-      catch(Exception e)
-      {
-      } //catch
+	private static PrintWriter pw;
+    public static void main(String[] args) throws Exception
+    {
+       /***************************************************
+                         PART I
+        **************************************************/
+       try
+       {
+          // funnel all System.out.print() results to the output file "Pd6EdundLauDictionaryOutputI.txt");
+          System.setOut(new PrintStream(new FileOutputStream("Pd6SamuelPrudencioDictionaryOutputI.txt")));
+       }
+       catch(Exception e)
+       {
+       } //catch
     
    
-      Map<String, Set<String>> eng2spn = new TreeMap<String, Set<String>>();
-      Scanner infile = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\spanglish.txt"));
-      while(infile.hasNext())
-      {
-         add(eng2spn, infile.next(), infile.next());
-      }
+       Map<String, Set<String>> eng2spn = new TreeMap<String, Set<String>>();
+       Scanner infile = new Scanner(new File("C:\\Users\\samue\\Homework for CSAB\\src\\spanglish.txt"));
+       while(infile.hasNext())
+       {
+          add(eng2spn, infile.next(), infile.next());
+       }
       
-      infile.close();
+       infile.close();
       
-      System.out.println("ENGLISH TO SPANISH");
-      display(eng2spn);
+       System.out.println("ENGLISH TO SPANISH");
+       display(eng2spn);
       
-      Map<String, Set<String>> spn2eng = reverse(eng2spn);
-      System.out.println("SPANISH TO ENGLISH");
-      display(spn2eng);
+       Map<String, Set<String>> spn2eng = reverse(eng2spn);
+       System.out.println("SPANISH TO ENGLISH");
+       display(spn2eng);
       
-      pw.close();    // close the output file
+       pw.close();    // close the output file
       
       
-      /***************************************************
-        Part II
+       /***************************************************
+         Part II
        **************************************************/
    
-      // The two maps are still in the memory. Part II can interact with the user and add
-      // new word(s) to both maps
-      // For this part of the program, display all outputs onto the console. See sample outputs below.
-      // After the user is done, write the two maps to a text file.
+       // The two maps are still in the memory. Part II can interact with the user and add
+       // new word(s) to both maps
+       // For this part of the program, display all outputs onto the console. See sample outputs below.
+       // After the user is done, write the two maps to a text file.
 
    
-      // Write your Part II code here
-      // Menu options: translate from (1) English to Spanish 
-      //                              (2) Spanish to English 
-      //                              (3) Add a new tranlation: (a) from English->Spanish (b) from Spanish->English
-      //                              (4) Exit
-     
-     
+       // Write your Part II code here
+       // Menu options: translate from (1) English to Spanish
+       //                              (2) Spanish to English
+       //                              (3) Add a new tranlation: (a) from English->Spanish (b) from Spanish->English
+       //                              (4) Exit
+	   int scheme = Integer.parseInt(JOptionPane.showInputDialog(
+		 	  "What would you like to do today? Select a number:\n1) Search Dictionary\n2) Add translation\n3) Exit"));
+
+	   switch (scheme)
+	   {
+		   case 1:
+			   table = new HashtableLinearProbe(arrayLength);
+			   break;
+		   case 2: // rehash using the first relatively prime or arrayLength
+			   table = new HashtableRehash(arrayLength);
+			   break;
+		   case 3:
+		  	   System.exit(0);
+		   default:
+		       System.exit(0);
+	   }
      
       // send the newly edited maps to a text file: Pd4EdmundLauDictionaryOuputII.txt
-      
+
+    } // main
    
-   } // main
+    // Note: must explain how your method works
+    // Postcondition: display the contents of  a dictionary on the screeb
+    public static void display(Map<String, Set<String>> m)
+    {
+    } // display
    
-   // Note: must explain how your method works
-   // Postcondition: display the contents of  a dictionary on the screeb
-   public static void display(Map<String, Set<String>> m)
-   {
-   } // display
-   
-   // Note: must explain how your method works
-   // postcondition: insert a new pair to the English to Spanish Dictionary
-   public static void add(Map<String, Set<String>> engToSpnDictionary, String word, String translation)
-   {
+    // Note: must explain how your method works
+    // postcondition: insert a new pair to the English to Spanish Dictionary
+    public static void add(Map<String, Set<String>> engToSpnDictionary, String word, String translation)
+    {
        
-   } // add
+    } // add
    
-   // Note: must explain how your method works
-   // postcondition: returns a Spanish to English dictionary
-   public static Map<String, Set<String>> reverse(Map<String, Set<String>> engToSpnDictionary)
-   {
-      return null;
-   } // reverse
+    // Note: must explain how your method works
+    // postcondition: returns a Spanish to English dictionary
+    public static Map<String, Set<String>> reverse(Map<String, Set<String>> engToSpnDictionary)
+    {
+       return null;
+    } // reverse
    
 }// Pd6SamuelPrudencioDictionary2022
 
-      /********************
-	INPUT:
-   	holiday
-		fiesta
-		holiday
-		vacaciones
-		party
-		fiesta
-		celebration
-		fiesta
-     <etc.>
-  *********************************** 
-	OUTPUT:
-		ENGLISH TO SPANISH
-			banana [banana]
-			celebration [fiesta]
-			computer [computadora, ordenador]
-			double [doblar, doble, duplicar]
-			father [padre]
-			feast [fiesta]
-			good [bueno]
-			hand [mano]
-			hello [hola]
-			holiday [fiesta, vacaciones]
-			party [fiesta]
-			plaza [plaza]
-			priest [padre]
-			program [programa, programar]
-			sleep [dormir]
-			son [hijo]
-			sun [sol]
-			vacation [vacaciones]
+/********************
+INPUT:
+holiday
+fiesta
+holiday
+vacaciones
+party
+fiesta
+celebration
+fiesta
+<etc.>
+***********************************
+OUTPUT:
+ENGLISH TO SPANISH
+	banana [banana]
+	celebration [fiesta]
+	computer [computadora, ordenador]
+	double [doblar, doble, duplicar]
+	father [padre]
+	feast [fiesta]
+	good [bueno]
+	hand [mano]
+	hello [hola]
+	holiday [fiesta, vacaciones]
+	party [fiesta]
+	plaza [plaza]
+	priest [padre]
+	program [programa, programar]
+	sleep [dormir]
+	son [hijo]
+	sun [sol]
+	vacation [vacaciones]
 
-		SPANISH TO ENGLISH
-			banana [banana]
-			bueno [good]
-			computadora [computer]
-			doblar [double]
-			doble [double]
-			dormir [sleep]
-			duplicar [double]
-			fiesta [celebration, feast, holiday, party]
-			hijo [son]
-			hola [hello]
-			mano [hand]
-			ordenador [computer]
-			padre [father, priest]
-			plaza [plaza]
-			programa [program]
-			programar [program]
-			sol [sun]
-			vacaciones [holiday, vacation]
-
+SPANISH TO ENGLISH
+	banana [banana]
+	bueno [good]
+	computadora [computer]
+	doblar [double]
+	doble [double]
+	dormir [sleep]
+	duplicar [double]
+	fiesta [celebration, feast, holiday, party]
+	hijo [son]
+	hola [hello]
+	mano [hand]
+	ordenador [computer]
+	padre [father, priest]
+	plaza [plaza]
+	programa [program]
+	programar [program]
+	sol [sun]
+	vacaciones [holiday, vacation]
 **********************/
 
 /***
