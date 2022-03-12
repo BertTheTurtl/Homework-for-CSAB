@@ -7,7 +7,6 @@
 // What I wonder:
 //***********************************************************************************************************************************
 
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -63,13 +62,23 @@ public class Pd6SamuelPrudencioDictionary2022
        //                              (2) Spanish to English
        //                              (3) Add a new tranlation: (a) from English->Spanish (b) from Spanish->English
        //                              (4) Exit
-	   int scheme = Integer.parseInt(JOptionPane.showInputDialog(
+
+		/*try
+		{
+			// funnel all System.out.print() results to the output file "Pd6SamuelPrudencioDictionaryOutputII.txt");
+			System.setOut(new PrintStream(new FileOutputStream("Pd6SamuelPrudencioDictionaryOutputII.txt")));
+		}
+		catch(Exception e)
+		{
+		} //catch
+
+		int scheme = Integer.parseInt(JOptionPane.showInputDialog(
 		 	  "What would you like to do today? Select a number:\n1) Search Dictionary\n2) Add translation\n3) Exit"));
 
-	   switch (scheme)
-	   {
-		   case 1:
-			   table = new HashtableLinearProbe(arrayLength);
+	    switch (scheme)
+	    {
+		    case 1:
+		 	   table = new HashtableLinearProbe(arrayLength);
 			   break;
 		   case 2: // rehash using the first relatively prime or arrayLength
 			   table = new HashtableRehash(arrayLength);
@@ -78,30 +87,62 @@ public class Pd6SamuelPrudencioDictionary2022
 		  	   System.exit(0);
 		   default:
 		       System.exit(0);
-	   }
+	   }*/
      
       // send the newly edited maps to a text file: Pd4EdmundLauDictionaryOuputII.txt
 
     } // main
    
     // Note: must explain how your method works
-    // Postcondition: display the contents of  a dictionary on the screeb
+    // Postcondition: display the contents of  a dictionary on the screen
     public static void display(Map<String, Set<String>> m)
     {
+		Iterator<String> iter = m.keySet().iterator();
+		while (iter.hasNext())
+		{
+			String key = iter.next();
+
+			System.out.println(key +" " +m.get(key));
+		}
     } // display
    
     // Note: must explain how your method works
-    // postcondition: insert a new pair to the English to Spanish Dictionary
-    public static void add(Map<String, Set<String>> engToSpnDictionary, String word, String translation)
+    // postcondition: insert a new pair to the Dictionary
+    public static void add(Map<String, Set<String>> dictionary, String word, String translation)
     {
-       
+       Set<String> input = new TreeSet<>();
+
+       if (dictionary.get(word) != null) {
+		   Iterator<String> iter = dictionary.get(word).iterator();
+		   while (iter.hasNext())
+		   	 input.add(iter.next());
+          }
+
+	   input.add(translation);
+       dictionary.put(word, input);
     } // add
    
     // Note: must explain how your method works
     // postcondition: returns a Spanish to English dictionary
-    public static Map<String, Set<String>> reverse(Map<String, Set<String>> engToSpnDictionary)
+    public static Map<String, Set<String>> reverse(Map<String, Set<String>> original)
     {
-       return null;
+		Map<String, Set<String>> reverse = new TreeMap<>();
+		Iterator<String> iter = original.keySet().iterator();
+
+		while (iter.hasNext())
+		{
+			String swap = iter.next();
+			Set<String> input = new TreeSet<>();
+
+			if (reverse.get(original.get(swap)) != null)
+			{
+				for (int i = 0; i < reverse.get(original.get(swap)).size(); i++)
+					input.add(reverse.get(original.get(swap)));
+			}
+			input.add(swap);
+
+			reverse.put(original.get(swap), input);
+		}
     } // reverse
    
 }// Pd6SamuelPrudencioDictionary2022
