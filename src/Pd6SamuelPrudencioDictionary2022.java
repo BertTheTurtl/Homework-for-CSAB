@@ -87,20 +87,27 @@ public class Pd6SamuelPrudencioDictionary2022
 					{
 						case 1:
 							String engKey = JOptionPane.showInputDialog("You have selected the English to Spanish dictionary. What word would you like to search for (type in all lowercase)?");
+							System.out.println(engKey);
 							if (eng2spn.containsKey(engKey))
-								System.out.println(eng2spn.get(engKey));
+								System.out.println(eng2spn.get(engKey) +"\n");
 							else
-								System.out.println("Sorry, this word is currently not in the dictionary.");
+								System.out.println("Sorry, this word is currently not in the dictionary.\n");
+							break;
 						case 2:
 							String spnKey = JOptionPane.showInputDialog("You have selected the Spanish to English dictionary. What word would you like to search for (type in all lowercase)?");
+							System.out.println(spnKey);
 							if (spn2eng.containsKey(spnKey))
-							System.out.println(eng2spn.get(spnKey));
+							System.out.println(spn2eng.get(spnKey) +"\n");
 							else
-								System.out.println("Sorry, this word is currently not in the dictionary.");
+								System.out.println("Sorry, this word is currently not in the dictionary.\n");
+							break;
 					}
+					break;
 				case 2:
+					
 					break;
 				case 3:
+					System.out.println("Thank you for your time! （˶′◡‵˶）");
 					System.exit(0);
 				default:
 					System.exit(0);
