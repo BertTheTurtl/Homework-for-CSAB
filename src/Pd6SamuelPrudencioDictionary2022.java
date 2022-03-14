@@ -7,6 +7,7 @@
 // What I wonder:
 //***********************************************************************************************************************************
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -63,7 +64,7 @@ public class Pd6SamuelPrudencioDictionary2022
 		//                              (3) Add a new tranlation: (a) from English->Spanish (b) from Spanish->English
 		//                              (4) Exit
 
-		/*try
+		try
 		{
 			// funnel all System.out.print() results to the output file "Pd6SamuelPrudencioDictionaryOutputII.txt");
 			System.setOut(new PrintStream(new FileOutputStream("Pd6SamuelPrudencioDictionaryOutputII.txt")));
@@ -72,25 +73,46 @@ public class Pd6SamuelPrudencioDictionary2022
 		{
 		} //catch
 
-		int scheme = Integer.parseInt(JOptionPane.showInputDialog(
-		 	  "What would you like to do today? Select a number:\n1) Search Dictionary\n2) Add translation\n3) Exit"));
-
-	    switch (scheme)
-	    {
-		    case 1:
-		 	   table = new HashtableLinearProbe(arrayLength);
-			   break;
-		   case 2: // rehash using the first relatively prime or arrayLength
-			   table = new HashtableRehash(arrayLength);
-			   break;
-		   case 3:
-		  	   System.exit(0);
-		   default:
-		       System.exit(0);
-	   }*/
+		int scheme = 0;
+		while (scheme != 3)
+		{
+			scheme = Integer.parseInt(JOptionPane.showInputDialog(
+		 		  "What would you like to do today? Select a number:\n1) Search Dictionary\n2) Add translation\n3) Exit"));
 		
-		// send the newly edited maps to a text file: Pd4EdmundLauDictionaryOuputII.txt
+	    	switch (scheme)
+			{
+				case 1:
+					int dictionaryChoice = Integer.parseInt(JOptionPane.showInputDialog("Choose 1 to translate from English to Spanish or 2 to translate from Spanish to English."));
+					switch (dictionaryChoice)
+					{
+						case 1:
+							String engKey = JOptionPane.showInputDialog("You have selected the English to Spanish dictionary. What word would you like to search for (type in all lowercase)?");
+							if (eng2spn.containsKey(engKey))
+								System.out.println(eng2spn.get(engKey));
+							else
+								System.out.println("Sorry, this word is currently not in the dictionary.");
+						case 2:
+							String spnKey = JOptionPane.showInputDialog("You have selected the Spanish to English dictionary. What word would you like to search for (type in all lowercase)?");
+							if (spn2eng.containsKey(spnKey))
+							System.out.println(eng2spn.get(spnKey));
+							else
+								System.out.println("Sorry, this word is currently not in the dictionary.");
+					}
+				case 2:
+					break;
+				case 3:
+					System.exit(0);
+				default:
+					System.exit(0);
+			}
+		}
 		
+		System.out.println("ENGLISH TO SPANISH");
+		display(eng2spn);
+		
+		System.out.println("SPANISH TO ENGLISH");
+		display(spn2eng);
+		// send the newly edited maps to a text file: Pd6SamuelPrudencioDictionaryOuputII.txt
 	} // main
 	
 	// Note: must explain how your method works
@@ -104,6 +126,7 @@ public class Pd6SamuelPrudencioDictionary2022
 			
 			System.out.println(key + " " + m.get(key));
 		}
+		System.out.println();
 	} // display
 	
 	// Note: must explain how your method works
@@ -124,7 +147,7 @@ public class Pd6SamuelPrudencioDictionary2022
 	} // add
 	
 	// Note: must explain how your method works
-	// postcondition: returns a Spanish to English dictionaryb
+	// postcondition: returns a Spanish to English dictionary
 	public static Map<String, Set<String>> reverse(Map<String, Set<String>> original)
 	{
 		Set<String> keyList = original.keySet();
@@ -149,30 +172,8 @@ public class Pd6SamuelPrudencioDictionary2022
 		return output;
 	}
 }
-//		original.getKeys();
-//		orginal.getValue();
-		/*Map<String, Set<String>> reverse = new TreeMap<>();
-		Iterator<String> iter = original.keySet().iterator();
-
-		while (iter.hasNext())
-		{
-			String swap = iter.next();
-			Set<String> input = new TreeSet<>();
-
-			if (reverse.get(original.get(swap)) != null)
-			{
-				for (int i = 0; i < reverse.get(original.get(swap)).size(); i++)
-					input.add(reverse.get(original.get(swap)));
-			}
-			input.add(swap);
-
-			reverse.put(original.get(swap), input);*/
 // Pd6SamuelPrudencioDictionary2022
 
-/*
-
-Commented
- */
 /* *******************
 INPUT:
 holiday
