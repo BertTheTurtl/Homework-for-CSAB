@@ -13,55 +13,55 @@ import java.util.*;
 public class Pd6SamuelPrudencioDictionary2022
 {
 	private static PrintWriter pw;
-    public static void main(String[] args) throws Exception
-    {
-       /***************************************************
-                         PART I
-        **************************************************/
-       try
-       {
-          // funnel all System.out.print() results to the output file "Pd6EdundLauDictionaryOutputI.txt");
-          System.setOut(new PrintStream(new FileOutputStream("Pd6SamuelPrudencioDictionaryOutputI.txt")));
-       }
-       catch(Exception e)
-       {
-       } //catch
-    
-   
-       Map<String, Set<String>> eng2spn = new TreeMap<String, Set<String>>();
-       Scanner infile = new Scanner(new File("C:\\Users\\samue\\Homework for CSAB\\src\\spanglish.txt"));
-       while(infile.hasNext())
-       {
-          add(eng2spn, infile.next(), infile.next());
-       }
-      
-       infile.close();
-      
-       System.out.println("ENGLISH TO SPANISH");
-       display(eng2spn);
-      
-       Map<String, Set<String>> spn2eng = reverse(eng2spn);
-       System.out.println("SPANISH TO ENGLISH");
-       display(spn2eng);
-      
-       pw.close();    // close the output file
-      
-      
-       /***************************************************
-         Part II
-       **************************************************/
-   
-       // The two maps are still in the memory. Part II can interact with the user and add
-       // new word(s) to both maps
-       // For this part of the program, display all outputs onto the console. See sample outputs below.
-       // After the user is done, write the two maps to a text file.
-
-   
-       // Write your Part II code here
-       // Menu options: translate from (1) English to Spanish
-       //                              (2) Spanish to English
-       //                              (3) Add a new tranlation: (a) from English->Spanish (b) from Spanish->English
-       //                              (4) Exit
+	
+	public static void main(String[] args) throws Exception
+	{
+		/***************************************************
+		 PART I
+		 **************************************************/
+		try
+		{
+			// funnel all System.out.print() results to the output file "Pd6EdundLauDictionaryOutputI.txt");
+			System.setOut(new PrintStream(new FileOutputStream("Pd6SamuelPrudencioDictionaryOutputI.txt")));
+		} catch (Exception e)
+		{
+		} //catch
+		
+		
+		Map<String, Set<String>> eng2spn = new TreeMap<String, Set<String>>();
+		Scanner infile = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\spanglish.txt"));
+		while (infile.hasNext())
+		{
+			add(eng2spn, infile.next(), infile.next());
+		}
+		
+		infile.close();
+		
+		System.out.println("ENGLISH TO SPANISH");
+		display(eng2spn);
+		
+		System.out.println("SPANISH TO ENGLISH");
+		Map<String, Set<String>> spn2eng = reverse(eng2spn);
+		display(spn2eng);
+		
+//		pw.close();    // close the output file
+		
+		
+		/***************************************************
+		 Part II
+		 **************************************************/
+		
+		// The two maps are still in the memory. Part II can interact with the user and add
+		// new word(s) to both maps
+		// For this part of the program, display all outputs onto the console. See sample outputs below.
+		// After the user is done, write the two maps to a text file.
+		
+		
+		// Write your Part II code here
+		// Menu options: translate from (1) English to Spanish
+		//                              (2) Spanish to English
+		//                              (3) Add a new tranlation: (a) from English->Spanish (b) from Spanish->English
+		//                              (4) Exit
 
 		/*try
 		{
@@ -88,45 +88,70 @@ public class Pd6SamuelPrudencioDictionary2022
 		   default:
 		       System.exit(0);
 	   }*/
-     
-      // send the newly edited maps to a text file: Pd4EdmundLauDictionaryOuputII.txt
-
-    } // main
-   
-    // Note: must explain how your method works
-    // Postcondition: display the contents of  a dictionary on the screen
-    public static void display(Map<String, Set<String>> m)
-    {
+		
+		// send the newly edited maps to a text file: Pd4EdmundLauDictionaryOuputII.txt
+		
+	} // main
+	
+	// Note: must explain how your method works
+	// Postcondition: display the contents of  a dictionary on the screen
+	public static void display(Map<String, Set<String>> m)
+	{
 		Iterator<String> iter = m.keySet().iterator();
 		while (iter.hasNext())
 		{
 			String key = iter.next();
-
-			System.out.println(key +" " +m.get(key));
+			
+			System.out.println(key + " " + m.get(key));
 		}
-    } // display
-   
-    // Note: must explain how your method works
-    // postcondition: insert a new pair to the Dictionary
-    public static void add(Map<String, Set<String>> dictionary, String word, String translation)
-    {
-       Set<String> input = new TreeSet<>();
-
-       if (dictionary.get(word) != null) {
-		   Iterator<String> iter = dictionary.get(word).iterator();
-		   while (iter.hasNext())
-		   	 input.add(iter.next());
-          }
-
-	   input.add(translation);
-       dictionary.put(word, input);
-    } // add
-   
-    // Note: must explain how your method works
-    // postcondition: returns a Spanish to English dictionary
-    public static Map<String, Set<String>> reverse(Map<String, Set<String>> original)
-    {
-		Map<String, Set<String>> reverse = new TreeMap<>();
+	} // display
+	
+	// Note: must explain how your method works
+	// postcondition: insert a new pair to the Dictionary
+	public static void add(Map<String, Set<String>> dictionary, String word, String translation)
+	{
+		Set<String> input = new TreeSet<>();
+		
+		if (dictionary.get(word) != null)
+		{
+			Iterator<String> iter = dictionary.get(word).iterator();
+			while (iter.hasNext())
+				input.add(iter.next());
+		}
+		
+		input.add(translation);
+		dictionary.put(word, input);
+	} // add
+	
+	// Note: must explain how your method works
+	// postcondition: returns a Spanish to English dictionaryb
+	public static Map<String, Set<String>> reverse(Map<String, Set<String>> original)
+	{
+		Set<String> keyList = original.keySet();
+		Map<String, Set<String>> output = new TreeMap<>();
+		// Iterates through the list of keys
+		for (String key : keyList)
+		{
+			// Iterates the values from a given key
+			for(String values: original.get(key)){
+				if(!output.containsKey(values)){
+					Set<String> valueSet = new TreeSet<>();
+					valueSet.add(key);
+					output.put(values, valueSet);
+				}
+				else{ // Value is already in key
+					// Obtain the set from the value, and add the key into the set.
+					output.get(values).add(key);
+				}
+			}
+		}
+		
+		return output;
+	}
+}
+//		original.getKeys();
+//		orginal.getValue();
+		/*Map<String, Set<String>> reverse = new TreeMap<>();
 		Iterator<String> iter = original.keySet().iterator();
 
 		while (iter.hasNext())
@@ -141,13 +166,14 @@ public class Pd6SamuelPrudencioDictionary2022
 			}
 			input.add(swap);
 
-			reverse.put(original.get(swap), input);
-		}
-    } // reverse
-   
-}// Pd6SamuelPrudencioDictionary2022
+			reverse.put(original.get(swap), input);*/
+// Pd6SamuelPrudencioDictionary2022
 
-/********************
+/*
+
+Commented
+ */
+/* *******************
 INPUT:
 holiday
 fiesta
@@ -201,7 +227,7 @@ SPANISH TO ENGLISH
 	vacaciones [holiday, vacation]
 **********************/
 
-/***
+/*
 CONSOLE OUTPUT FOR PART II:
 
 What would you like to do today? Select a number: 
@@ -329,4 +355,4 @@ programa [program]
 programar [program]
 sol [sun]
 vacaciones [holiday, vacation]
-***/
+*/
