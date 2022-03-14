@@ -2,9 +2,9 @@
 // Name: Samuel Prudencio
 // Period: 6
 // Date: 3/11/2022
-// What I learned:
-// How I feel about this lab:
-// What I wonder:
+// What I learned: How to use JOptionPane and reversing maps
+// How I feel about this lab: Deeply satisfied. I beautified as much as I could
+// What I wonder: How did I do this in time?
 //***********************************************************************************************************************************
 
 import javax.swing.*;
@@ -73,47 +73,100 @@ public class Pd6SamuelPrudencioDictionary2022
 		{
 		} //catch
 
+		//Create scheme outside of loop so that it can be the parameter of the while loop
 		int scheme = 0;
 		while (scheme != 3)
 		{
+			//selecting what the user wants to do
 			scheme = Integer.parseInt(JOptionPane.showInputDialog(
 		 		  "What would you like to do today? Select a number:\n1) Search Dictionary\n2) Add translation\n3) Exit"));
-		
-	    	switch (scheme)
+			System.out.println("What would you like to do today? Select a number: \n1) Search Dictionary \n2) Add translation \n3) Exit");
+			switch (scheme)
 			{
+				//Searching in the dictionaries
 				case 1:
 					int dictionaryChoice = Integer.parseInt(JOptionPane.showInputDialog("Choose 1 to translate from English to Spanish or 2 to translate from Spanish to English."));
+					System.out.println("Choose 1 to translate from English to Spanish or 2 to translate from Spanish to English.");
+					//picking between English and Spanish dictionary
 					switch (dictionaryChoice)
 					{
+						//English dictionary
 						case 1:
 							String engKey = JOptionPane.showInputDialog("You have selected the English to Spanish dictionary. What word would you like to search for (type in all lowercase)?");
+							System.out.println("You have selected the English to Spanish dictionary. What word would you like to search for (type in all lowercase)?");
 							System.out.println(engKey);
 							if (eng2spn.containsKey(engKey))
-								System.out.println(eng2spn.get(engKey) +"\n");
+							{
+								JOptionPane.showMessageDialog(null, eng2spn.get(engKey));
+								System.out.println(eng2spn.get(engKey) + "\n");
+							}
 							else
+							{
+								JOptionPane.showMessageDialog(null, "Sorry, this word is currently not in the dictionary.");
 								System.out.println("Sorry, this word is currently not in the dictionary.\n");
+							}
 							break;
-						case 2:
+						//Spanish dictionary
+							case 2:
 							String spnKey = JOptionPane.showInputDialog("You have selected the Spanish to English dictionary. What word would you like to search for (type in all lowercase)?");
+							System.out.println("You have selected the Spanish to English dictionary. What word would you like to search for (type in all lowercase)?");
 							System.out.println(spnKey);
 							if (spn2eng.containsKey(spnKey))
-							System.out.println(spn2eng.get(spnKey) +"\n");
+							{
+								JOptionPane.showMessageDialog(null, spn2eng.get(spnKey));
+								System.out.println(spn2eng.get(spnKey) + "\n");
+							}
 							else
+								JOptionPane.showMessageDialog(null, "Sorry, this word is currently not in the dictionary.");
 								System.out.println("Sorry, this word is currently not in the dictionary.\n");
 							break;
 					}
 					break;
+				//Adding a translation
 				case 2:
+					//asking for English word
+					String engAdd = JOptionPane.showInputDialog("What English word would you like to add?");
+					System.out.println("What English word would you like to add?");
+					System.out.println(engAdd);
+					//asking for Spanish word
+					String spnAdd = JOptionPane.showInputDialog("What is the Spanish translation?");
+					System.out.println("What is the Spanish translation?");
+					System.out.println(spnAdd);
 					
+					Set<String> newEngTranslation = new TreeSet<>();
+					//checks if adding onto existing translation list
+					if (eng2spn.get(engAdd) != null)
+					{
+						newEngTranslation = eng2spn.get(engAdd);
+					}
+					//adds new translation to the list
+					newEngTranslation.add(spnAdd);
+					eng2spn.put(engAdd, newEngTranslation);
+					
+					Set<String> newSpnTranslation = new TreeSet<>();
+					//checks if adding onto existing translation list
+					if (spn2eng.get(spnAdd) != null)
+					{
+						newSpnTranslation = spn2eng.get(spnAdd);
+					}
+					//adds new translation to the list
+					newSpnTranslation.add(engAdd);
+					spn2eng.put(spnAdd, newSpnTranslation);
+					
+					System.out.println();
 					break;
+				//Exiting the program and thank you message
 				case 3:
+					JOptionPane.showMessageDialog(null, "Thank you for your time! （˶′◡‵˶）");
 					System.out.println("Thank you for your time! （˶′◡‵˶）");
 					System.exit(0);
+				//default catch all
 				default:
 					System.exit(0);
 			}
 		}
 		
+		//Reprinting the new English and Spanish dictionaries
 		System.out.println("ENGLISH TO SPANISH");
 		display(eng2spn);
 		
