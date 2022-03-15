@@ -78,8 +78,12 @@ public class Pd6SamuelPrudencioDictionary2022
 		while (scheme != 3)
 		{
 			//selecting what the user wants to do
-			scheme = Integer.parseInt(JOptionPane.showInputDialog(
-		 		  "What would you like to do today? Select a number:\n1) Search Dictionary\n2) Add translation\n3) Exit"));
+			String selection = JOptionPane.showInputDialog(
+					"What would you like to do today? Select a number:\n1) Search Dictionary\n2) Add translation\n3) Exit");
+			if (selection != null)
+				scheme = Integer.parseInt(selection);
+			else
+				scheme = 0;
 			System.out.println("What would you like to do today? Select a number: \n1) Search Dictionary \n2) Add translation \n3) Exit");
 			switch (scheme)
 			{
@@ -157,11 +161,13 @@ public class Pd6SamuelPrudencioDictionary2022
 					break;
 				//Exiting the program and thank you message
 				case 3:
-					JOptionPane.showMessageDialog(null, "Thank you for your time! （˶′◡‵˶）");
-					System.out.println("Thank you for your time! （˶′◡‵˶）");
+					JOptionPane.showMessageDialog(null, "Goodbye!\nThank you for your time! （˶′◡‵˶）");
+					System.out.println("Goodbye!\nThank you for your time! （˶′◡‵˶）");
 					System.exit(0);
 				//default catch all
 				default:
+					JOptionPane.showMessageDialog(null, "Goodbye!\nThank you for your time! （˶′◡‵˶）");
+					System.out.println("Goodbye!\nThank you for your time! （˶′◡‵˶）");
 					System.exit(0);
 			}
 		}
