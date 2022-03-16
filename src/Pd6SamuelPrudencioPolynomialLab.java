@@ -1,10 +1,10 @@
 /**
  * Name: Samuel Prudencio
  * Period: 6
- * Purpose of the Program: 
- * What I learned:
+ * Purpose of the Program: To refresh on how to use classes
+ * What I learned: I relearned the power rules for integrating and deriving
  *   
- * Credits: 
+ * Credits: Abhinav helped me in getting started, in imagining how the class should look like
  */
 import java.util.*;
 public class Pd6SamuelPrudencioPolynomialLab
@@ -26,8 +26,16 @@ public class Pd6SamuelPrudencioPolynomialLab
       poly2.makeTerm(2, 1); 
       System.out.println(poly2.toString());
    	
-      //System.out.println(poly.add(poly2));
-      //System.out.println(poly.multiply(poly2));
+      System.out.println(poly.add(poly2));
+      System.out.println(poly.multiply(poly2));
+      System.out.println();
+
+      System.out.println("The derivative of " +poly.toString() +" is: " +poly.derive());
+      System.out.println("The derivative of " +poly2.toString() +" is: " +poly2.derive());
+      System.out.println();
+
+      System.out.println("The integral of " +poly.toString() +" is: " +poly.integrate());
+      System.out.println("The integral of " +poly2.toString() +" is: " +poly2.integrate());
    }
 }
 
@@ -61,14 +69,29 @@ class Polynomial
    
    public String add(Polynomial other)
    {
-      return "";
+      Polynomial answer = new Polynomial();
+      for (int i = 0; i < poly.length; i++)
+      {
+         answer.makeTerm(i, poly[i] + other.poly[i]);
+      }
+      return answer.toString();
    }
    
    public String multiply(Polynomial other)
    {
-      return "";
+      Polynomial answer = new Polynomial();
+      answer.poly = new int[19];
+      for (int i = 0; i < poly.length; i++)
+      {
+         for (int k = 0; k < other.poly.length; k++)
+         {
+            answer.poly[i + k] += poly[i] * other.poly[k];
+         }
+      }
+      return answer.toString();
    }
-   
+
+   //toString method
    public String toString()
    {
       String result = "";
@@ -83,6 +106,29 @@ class Polynomial
       }
       return result;
    }
+
+   //Extra work
+   public String integrate()
+   {
+      Polynomial answer = new Polynomial();
+
+      for (int i = 0; i < poly.length - 1; i++)
+      {
+         answer.poly[i + 1] = poly[i] / (i + 1);
+      }
+
+      return answer.toString() +" + C";
+   }
+
+   public String derive()
+   {
+      Polynomial answer = new Polynomial();
+      for (int i = poly.length - 1; i > 0; i--)
+      {
+         answer.poly[i - 1] = poly[i] * i;
+      }
+      return answer.toString();
+   }
 }
 
 /*
@@ -90,9 +136,13 @@ To-Do List:
 [x] constructor
 [x] makeTerm()
 [x] evaluateAt()
-[ ] add()
-[ ] multiply()
+[x] add()
+[x] multiply()
 [x] toString()
+
+IF WANT PAIN:
+[x] derive()
+[ ] integrate()
  */
 /*  
 expected output
