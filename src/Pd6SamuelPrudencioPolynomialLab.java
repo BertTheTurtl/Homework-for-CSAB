@@ -34,8 +34,8 @@ public class Pd6SamuelPrudencioPolynomialLab
       System.out.println("The derivative of " +poly2.toString() +" is: " +poly2.derive());
       System.out.println();
 
-      System.out.println("The integral of " +poly.toString() +" is: " +poly.integrate());
-      System.out.println("The integral of " +poly2.toString() +" is: " +poly2.integrate());
+      System.out.println("The integral of " +poly.toString() +" is: " +poly.integrate(1.0, 2.0));
+      System.out.println("The integral of " +poly2.toString() +" is: " +poly2.integrate(1.0, 2.0));
    }
 }
 
@@ -139,17 +139,54 @@ class Polynomial
    }
 
    //Extra work
-   public String integrate()
+   public double integrate(double lowerBound, double upperBound)
    {
-      Polynomial answer = new Polynomial();
+      Map<Double, Double> answer = new TreeMap<>();
+      Map<Double, Double> polyCopy = new TreeMap<>();
       Iterator<Integer> keyList = poly.keySet().iterator();
       while (keyList.hasNext())
       {
          int current = keyList.next();
-         answer.poly.put(current + 1, poly.get(current) / (current + 1));
+         answer.put((double) current + 1, (double) poly.get(current) / (current + 1));
       }
-
-      return answer.toString() +"C";
+      
+      keyList = poly.keySet().iterator();
+      while (keyList.hasNext())
+      {
+         int current = keyList.next();
+         polyCopy.put((double) current, (double) poly.get(current));
+      }
+      
+      double integrated = 0.0;
+      double result = 0.0;
+      Iterator<Double> iter = answer.keySet().iterator();
+      double bound = upperBound;
+      
+      while (iter.hasNext())
+      {
+         double current = iter.next();
+         if (current == 0)
+            result += polyCopy.get(current);
+         else if (answer.get(current) != null)
+            result += Math.pow(bound, current) * answer.get(current);
+      }
+      
+      integrated = result;
+      result = 0.0;
+      bound = lowerBound;
+      iter = answer.keySet().iterator();
+      
+      while (iter.hasNext())
+      {
+         double current = iter.next();
+         if (current == 0)
+            result += polyCopy.get(current);
+         else if (answer.get(current) != null)
+            result += Math.pow(bound, current) * answer.get(current);
+      }
+      
+      integrated = integrated - result;
+      return integrated;
    }
 
    public String derive()
