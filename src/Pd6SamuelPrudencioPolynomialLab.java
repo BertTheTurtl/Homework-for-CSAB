@@ -1,8 +1,8 @@
 /**
  * Name: Samuel Prudencio
  * Period: 6
- * Purpose of the Program: To refresh on how to use classes
- * What I learned: I relearned the power rules for integrating and deriving
+ * Purpose of the Program: To use multiple maps with each other to form unique results
+ * What I learned: I relearned the power rules for integrating and deriving as well as how to use two maps at the same time.
  *   
  * Credits: Abhinav helped me in getting started, in imagining how the class should look like
  */
@@ -42,51 +42,79 @@ public class Pd6SamuelPrudencioPolynomialLab
 
 class Polynomial
 {
-   private int[] poly;
-   
+   private Map<Integer, Integer> poly;
+
+   //constructor
    public Polynomial()
    {
-      poly = new int[10];
+      poly = new TreeMap<>();
    }
-   
+
+   //makeTerm method
    public void makeTerm(int power, int coefficient)
    {
-      poly[power] = coefficient;
+      poly.put(power, coefficient);
    }
-   
+
+   //evaluateAt method
    public double evaluateAt (double solver)
    {
       double result = 0.0;
-      for (int i = 0; i < poly.length; i++)
+      Iterator<Integer> keyList = poly.keySet().iterator();
+      while (keyList.hasNext())
       {
-         if (i == 0)
-            result += poly[i];
+         int current = keyList.next();
+         if (current == 0)
+            result += poly.get(current);
          else
-            result += Math.pow(solver, i) * poly[i];
+            result += Math.pow(solver, current) * poly.get(current);
       }
       return result;
    }
-   
+
+   //add method
    public String add(Polynomial other)
    {
       Polynomial answer = new Polynomial();
-      for (int i = 0; i < poly.length; i++)
+      Iterator<Integer> keyList = poly.keySet().iterator();
+      Iterator<Integer> otherKeyList = other.poly.keySet().iterator();
+      while (keyList.hasNext())
       {
-         answer.makeTerm(i, poly[i] + other.poly[i]);
+         int current = keyList.next();
+         if (other.poly.get(current) != null)
+            answer.makeTerm(current, poly.get(current) + other.poly.get(current));
+         else
+            answer.makeTerm(current, poly.get(current));
+      }
+      while (otherKeyList.hasNext())
+      {
+         int otherCurrent = otherKeyList.next();
+         if (poly.get(otherCurrent) != null)
+            answer.makeTerm(otherCurrent, poly.get(otherCurrent) + other.poly.get(otherCurrent));
+         else
+            answer.makeTerm(otherCurrent, other.poly.get(otherCurrent));
       }
       return answer.toString();
    }
-   
+
+   //multiply method
    public String multiply(Polynomial other)
    {
       Polynomial answer = new Polynomial();
-      answer.poly = new int[19];
-      for (int i = 0; i < poly.length; i++)
+      Iterator<Integer> keyList = poly.keySet().iterator();
+      Iterator<Integer> otherKeyList = other.poly.keySet().iterator();
+      while (keyList.hasNext())
       {
-         for (int k = 0; k < other.poly.length; k++)
+         int current = keyList.next();
+         while (otherKeyList.hasNext())
          {
-            answer.poly[i + k] += poly[i] * other.poly[k];
+            int otherCurrent = otherKeyList.next();
+            if (answer.poly.get(current + otherCurrent) == null)
+               answer.poly.put(current + otherCurrent, poly.get(current) * other.poly.get(otherCurrent));
+            else
+               answer.poly.put(current + otherCurrent, answer.poly.get(current + otherCurrent) + poly.get(current) * other.poly.get(otherCurrent));
          }
+         otherKeyList = other.poly.keySet().iterator();
       }
       return answer.toString();
    }
@@ -94,15 +122,18 @@ class Polynomial
    //toString method
    public String toString()
    {
+      Iterator<Integer> keyList = poly.keySet().iterator();
       String result = "";
-      for (int i = poly.length - 1; i >= 0; i--)
+      while (keyList.hasNext())
       {
-         if (i == 0)
-            result += poly[i];
-         else if (poly[i] == 1)
-            result += "x^" +i +" + ";
-         else if(poly[i] != 0)
-            result = result + poly[i] +"x^" +i +" + ";
+         int current = keyList.next();
+
+         if (current == 0)
+            result += poly.get(current);
+         else if (poly.get(current) == 1)
+            result = "x^" +current +" + " + result;
+         else if(poly.get(current) != 0)
+            result = poly.get(current) +"x^" +current +" + " +result;
       }
       return result;
    }
@@ -111,21 +142,24 @@ class Polynomial
    public String integrate()
    {
       Polynomial answer = new Polynomial();
-
-      for (int i = 0; i < poly.length - 1; i++)
+      Iterator<Integer> keyList = poly.keySet().iterator();
+      while (keyList.hasNext())
       {
-         answer.poly[i + 1] = poly[i] / (i + 1);
+         int current = keyList.next();
+         answer.poly.put(current + 1, poly.get(current) / (current + 1));
       }
 
-      return answer.toString() +" + C";
+      return answer.toString() +"C";
    }
 
    public String derive()
    {
       Polynomial answer = new Polynomial();
-      for (int i = poly.length - 1; i > 0; i--)
+      Iterator<Integer> keyList = poly.keySet().iterator();
+      while (keyList.hasNext())
       {
-         answer.poly[i - 1] = poly[i] * i;
+         int current = keyList.next();
+         answer.poly.put(current - 1, poly.get(current) * current);
       }
       return answer.toString();
    }
