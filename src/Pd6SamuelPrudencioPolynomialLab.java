@@ -17,7 +17,7 @@ public class Pd6SamuelPrudencioPolynomialLab
       poly.makeTerm(0, 2);
       System.out.println(poly.toString());
       double evaluateAt = 2.0;
-      System.out.println("Evaluated at "+ evaluateAt +": " +poly.evaluateAt(evaluateAt));
+      //System.out.println("Evaluated at "+ evaluateAt +": " +poly.evaluateAt(evaluateAt));
    	   	
       Polynomial poly2 = new Polynomial();
       poly2.makeTerm(1, -5);
@@ -26,8 +26,8 @@ public class Pd6SamuelPrudencioPolynomialLab
       poly2.makeTerm(2, 1); 
       System.out.println(poly2.toString());
    	
-      System.out.println(poly.add(poly2));
-      System.out.println(poly.multiply(poly2));
+      //System.out.println(poly.add(poly2));
+      //System.out.println(poly.multiply(poly2));
    }
 }
 
@@ -41,7 +41,7 @@ class Polynomial
       poly = new int[10];
    }
    
-   public void makeTerm(int coefficient, int power)
+   public void makeTerm(int power, int coefficient)
    {
       poly[power] = coefficient;
    }
@@ -64,9 +64,14 @@ class Polynomial
    public String toString()
    {
       String result = "";
-      for (int x: poly)
+      for (int i = poly.length - 1; i >= 0; i--)
       {
-      
+         if (i == 0)
+            result += poly[i];
+         else if (poly[i] == 1)
+            result += "x^" +i +" + ";
+         else if(poly[i] != 0)
+            result = result + poly[i] +"x^" +i +" + ";
       }
       return result;
    }
@@ -74,12 +79,12 @@ class Polynomial
 
 /*
 To-Do List:
-[ ] constructor
-[ ] makeTerm()
+[x] constructor
+[x] makeTerm()
 [ ] evaluateAt()
 [ ] add()
 [ ] multiply()
-[ ] toString()
+[x] toString()
  */
 /*  
 expected output
