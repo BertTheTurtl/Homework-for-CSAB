@@ -17,7 +17,7 @@ public class Pd6SamuelPrudencioPolynomialLab
       poly.makeTerm(0, 2);
       System.out.println(poly.toString());
       double evaluateAt = 2.0;
-      //System.out.println("Evaluated at "+ evaluateAt +": " +poly.evaluateAt(evaluateAt));
+      System.out.println("Evaluated at "+ evaluateAt +": " +poly.evaluateAt(evaluateAt));
    	   	
       Polynomial poly2 = new Polynomial();
       poly2.makeTerm(1, -5);
@@ -48,7 +48,15 @@ class Polynomial
    
    public double evaluateAt (double solver)
    {
-      return 0.0;
+      double result = 0.0;
+      for (int i = 0; i < poly.length; i++)
+      {
+         if (i == 0)
+            result += poly[i];
+         else
+            result += Math.pow(solver, i) * poly[i];
+      }
+      return result;
    }
    
    public String add(Polynomial other)
@@ -81,7 +89,7 @@ class Polynomial
 To-Do List:
 [x] constructor
 [x] makeTerm()
-[ ] evaluateAt()
+[x] evaluateAt()
 [ ] add()
 [ ] multiply()
 [x] toString()
