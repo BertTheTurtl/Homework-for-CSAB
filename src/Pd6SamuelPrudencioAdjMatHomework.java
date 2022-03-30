@@ -47,7 +47,7 @@ class AdjMat implements AdjacencyMatrix//, Warshall,Floyd
    /*  enter your code here  */  
    public AdjMat (int size)
    {
-   
+      grid = new int[size][size];
    }
    
    public void addEdge(int source, int target)
@@ -98,6 +98,4 @@ To-Do List:
 [ ] toString()
 [ ] edgeCount()
 [ ] getNeighbors()
-[ ]
-[ ]
  */
