@@ -52,33 +52,57 @@ class AdjMat implements AdjacencyMatrix//, Warshall,Floyd
    
    public void addEdge(int source, int target)
    {
-   
+      grid[source][target] = 1;
    }
    
    public void removeEdge(int source, int target)
    {
-   
+      grid[source][target] = 0;
    }
    
    public boolean isEdge(int from, int to)
    {
-      return false;
+      return grid[from][to] == 1;
    }
    
    //returns the grid as a String
    public String toString()
    {
-      return null;
+      String result = "";
+      for (int[] x : grid)
+      {
+         for (int y : x)
+         {
+            result = result +y +" ";
+         }
+         result = result +"\n";
+      }
+      return result;
    }   
    
    public int edgeCount()
    {
-      return 0;
+      int count = 0;
+      for (int x = 0; x < grid.length; x++)
+      {
+         for (int y = 0; y < grid.length; y++)
+         {
+            if (grid[x][y] == 1)
+               count++;
+         }
+      }
+      return count;
    }
    
    public List<Integer> getNeighbors(int source)
    {
-      return null;
+      ArrayList<Integer> result = new ArrayList<>();
+      for (int x = 0; x < grid.length; x++)
+      {
+         if (grid[source][x] == 1)
+            result.add(x);
+      }
+      return result;
    }
 } // AdjMat
 
@@ -92,10 +116,10 @@ public class Pd6SamuelPrudencioAdjMatHomework
 
 /*
 To-Do List:
-[ ] constructor
-[ ] addEdge()
-[ ] isEdge()
-[ ] toString()
-[ ] edgeCount()
+[x] constructor
+[x] addEdge()
+[x] isEdge()
+[x] toString()
+[x] edgeCount()
 [ ] getNeighbors()
  */
