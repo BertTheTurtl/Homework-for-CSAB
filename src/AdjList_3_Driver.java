@@ -77,21 +77,3 @@ public class AdjList_3_Driver
  C [C D]
  D [C A]
      ************************/
-
-/*private boolean[] visited = new boolean[10];
-
-return depthFirstRecurHelper(vertices.get(nameToIndex.get(name)), vertices);
-
-        return depthFirstRecurHelper(v, vertices);
-
-        List<Vertex> result = new ArrayList<>();
-
-        visited[nameToIndex.get(v.getName())] = true;
-        result.add(vertices.get(nameToIndex.get(v.getName())));
-
-        for (int i = 0; i < vertices.size(); i++)
-        {
-        if (!visited[i])
-        depthFirstRecurHelper(vertices.get(i), vertices);
-        }
-        return result;*/

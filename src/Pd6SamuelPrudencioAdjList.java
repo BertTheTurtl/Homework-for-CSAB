@@ -199,3 +199,22 @@ Pd6SamuelPrudencioAdjList
 [x] toString()
  */
 
+/*
+Extra Credit Private Variable: private boolean[] visited = new boolean[10];
+
+First Extra Credit Method: return depthFirstRecurHelper(vertices.get(nameToIndex.get(name)), vertices);
+
+Second Extra Credit Method: return depthFirstRecurHelper(v, vertices);
+
+Third Extra Credit Method: List<Vertex> result = new ArrayList<>();
+
+        visited[nameToIndex.get(v.getName())] = true;
+        result.add(vertices.get(nameToIndex.get(v.getName())));
+
+        for (int i = 0; i < vertices.size(); i++)
+        {
+        if (!visited[i])
+        depthFirstRecurHelper(vertices.get(i), vertices);
+        }
+        return result;
+*/
