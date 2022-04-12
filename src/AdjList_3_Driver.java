@@ -42,6 +42,10 @@ public class AdjList_3_Driver
       System.out.println("  get vertex by index:  " + g.getVertex(1));  
       System.out.println("  get vertex by name:  " + g.getVertex("B").toString());  
       System.out.println("the whole graph:\n"+g.toString());
+      
+      System.out.println("\nExtra Credit!");
+      System.out.println("DFS by name:\n" +g.depthFirstRecur("B"));
+      System.out.println("DFS by Vertex:\n" +g.depthFirstRecur(g.getVertex("B")));
    }
 }
 

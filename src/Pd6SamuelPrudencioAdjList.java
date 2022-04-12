@@ -166,17 +166,29 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface// , DFS_BFS ,
  /*  three extra credit methods, recursive version  */
    List<Vertex> depthFirstRecur(String name)
    {
-       return null;
+       ArrayList<Vertex> result = new ArrayList<>();
+       depthFirstRecurHelper(vertices.get(nameToIndex.get(name)), result);
+       return result;
    }
    
    List<Vertex> depthFirstRecur(Vertex v)
    {
-       return null;
+       ArrayList<Vertex> result = new ArrayList<>();
+       depthFirstRecurHelper(v, result);
+       return result;
    }
 
    void depthFirstRecurHelper(Vertex v, ArrayList<Vertex> reachable)
    {
-
+       if (reachable.contains(v))
+       {
+           return;
+       }
+       reachable.add(v);
+       for (Vertex i : v.getAdjacencies())
+       {
+           depthFirstRecurHelper(i, reachable);
+       }
    }   
 }
 
@@ -202,9 +214,9 @@ Pd6SamuelPrudencioAdjList
 /*
 Extra Credit Private Variable: private boolean[] visited = new boolean[10];
 
-First Extra Credit Method: return depthFirstRecurHelper(vertices.get(nameToIndex.get(name)), vertices);
+First Extra Credit Method: return depthFirstRecurHelper(vertices.get(nameToIndex.get(name)), result);
 
-Second Extra Credit Method: return depthFirstRecurHelper(v, vertices);
+Second Extra Credit Method: return depthFirstRecurHelper(v, result);
 
 Third Extra Credit Method: List<Vertex> result = new ArrayList<>();
 
