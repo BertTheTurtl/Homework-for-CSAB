@@ -18,7 +18,7 @@ interface AdjacencyMatrix
    String toString();   //returns the grid as a String
    int edgeCount();
    List<Integer> getNeighbors(int source);
-   //public List<String> getReachables(String from);  //Warshall extension
+   List<String> getReachables(String from);  //Warshall extension
 }
 
 interface Warshall      //User-friendly functionality
@@ -38,7 +38,7 @@ interface Floyd
    void allPairsWeighted(); 
 }
 
-class AdjMat implements AdjacencyMatrix//, Warshall,Floyd 
+class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
 {
    private int[][] grid = null;   //adjacency matrix representation
    private Map<String, Integer> vertices = null;   // name maps to index (for Warshall & Floyd)
@@ -48,6 +48,8 @@ class AdjMat implements AdjacencyMatrix//, Warshall,Floyd
    public AdjMat (int size)
    {
       grid = new int[size][size];
+      vertices = new TreeMap<>();
+      nameList = new ArrayList<>();
    }
    
    public void addEdge(int source, int target)
@@ -104,6 +106,48 @@ class AdjMat implements AdjacencyMatrix//, Warshall,Floyd
       }
       return result;
    }
+   
+   public boolean isEdge(String from, String to)
+   {
+   
+   }
+   
+   public Map<String, Integer> getVertices()
+   {
+   
+   }
+   
+   public void readNames(String fileName) throws FileNotFoundException
+   {
+   
+   }
+   
+   public void readGrid(String fileName) throws FileNotFoundException
+   {
+      Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\cities.txt"));
+      sc.nextInt();
+      while (sc.hasNextLine())
+      {
+         String name = sc.nextLine();
+         nameList.add(name);
+         vertices.put(name, nameList.indexOf(name));
+      }
+   }
+   
+   public void displayVertices()
+   {
+   
+   }
+   
+   public void allPairsReachability()
+   {
+   
+   }
+   
+   public List<String> getReachables(String from)
+   {
+   
+   }
 } // AdjMat
 
 public class Pd6SamuelPrudencioAdjMatHomework
@@ -121,5 +165,13 @@ To-Do List:
 [x] isEdge()
 [x] toString()
 [x] edgeCount()
-[ ] getNeighbors()
+[x] getNeighbors()
+
+Warshall To-Do List:
+[ ] isEdge()
+[ ] getVertices()
+[ ] readNames()
+[ ] readGrid()
+[ ] displayVertices()
+[ ] allPairsReachability()
  */
