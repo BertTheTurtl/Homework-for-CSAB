@@ -109,7 +109,9 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public boolean isEdge(String from, String to)
    {
-   
+      int fromInt = vertices.get(from);
+      int toInt = vertices.get(to);
+      return grid[fromInt][toInt] == 1;
    }
    
    public Map<String, Integer> getVertices()
@@ -119,7 +121,14 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public void readNames(String fileName) throws FileNotFoundException
    {
-   
+      Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\" +fileName +".txt"));
+      sc.nextInt();
+      while (sc.hasNextLine())
+      {
+         String name = sc.nextLine();
+         nameList.add(name);
+         vertices.put(name, nameList.indexOf(name));
+      }
    }
    
    public void readGrid(String fileName) throws FileNotFoundException
@@ -128,9 +137,11 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
       sc.nextInt();
       while (sc.hasNextLine())
       {
-         String name = sc.nextLine();
-         nameList.add(name);
-         vertices.put(name, nameList.indexOf(name));
+         String line = sc.nextLine().replaceAll(" ", "");
+         for (int i = 0; i < line.length() - 1; i++)
+         {
+            Integer.parseInt(line.substring(i, i + 1));
+         }
       }
    }
    
@@ -168,10 +179,10 @@ To-Do List:
 [x] getNeighbors()
 
 Warshall To-Do List:
-[ ] isEdge()
+[x] isEdge()
 [ ] getVertices()
 [ ] readNames()
-[ ] readGrid()
+[x] readGrid()
 [ ] displayVertices()
 [ ] allPairsReachability()
  */
