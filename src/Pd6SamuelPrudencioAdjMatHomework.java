@@ -28,6 +28,7 @@ interface Warshall      //User-friendly functionality
    void readNames(String fileName) throws FileNotFoundException;
    void readGrid(String fileName) throws FileNotFoundException;
    void displayVertices();
+   void displayGrid();
    void allPairsReachability();  // Warshall's Algorithm
 }
 
@@ -116,7 +117,7 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public Map<String, Integer> getVertices()
    {
-   
+      return vertices;
    }
    
    public void readNames(String fileName) throws FileNotFoundException
@@ -135,19 +136,27 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    {
       Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\cities.txt"));
       sc.nextInt();
+      int lineCount = 0;
+
       while (sc.hasNextLine())
       {
          String line = sc.nextLine().replaceAll(" ", "");
          for (int i = 0; i < line.length() - 1; i++)
          {
-            Integer.parseInt(line.substring(i, i + 1));
+            grid[lineCount][i] = Integer.parseInt(line.substring(i, i + 1));
          }
+         lineCount++;
       }
    }
    
    public void displayVertices()
    {
-   
+      Iterator <String> iter = vertices.keySet().iterator();
+   }
+
+   public void displayGrid()
+   {
+
    }
    
    public void allPairsReachability()
@@ -180,8 +189,8 @@ To-Do List:
 
 Warshall To-Do List:
 [x] isEdge()
-[ ] getVertices()
-[ ] readNames()
+[x] getVertices()
+[x] readNames()
 [x] readGrid()
 [ ] displayVertices()
 [ ] allPairsReachability()
