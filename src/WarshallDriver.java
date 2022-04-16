@@ -10,7 +10,7 @@ public class WarshallDriver
         System.out.print("Warshall's Algorithm! Enter file of names: ");
         //cities
         String fileNames = kb.next()+".txt";
-        Scanner sc = new Scanner(new File(fileNames));
+        Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\" +fileNames));
         int size = sc.nextInt();
         AdjMat g = new AdjMat(size);
         g.readNames(fileNames);

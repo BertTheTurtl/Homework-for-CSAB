@@ -122,8 +122,8 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public void readNames(String fileName) throws FileNotFoundException
    {
-      Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\" +fileName +".txt"));
-      sc.nextInt();
+      Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\" +fileName));
+      sc.nextLine();
       while (sc.hasNextLine())
       {
          String name = sc.nextLine();
@@ -134,16 +134,19 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public void readGrid(String fileName) throws FileNotFoundException
    {
-      Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\cities.txt"));
-      sc.nextInt();
+      Scanner sc = new Scanner(new File("C:\\Users\\Miguel\\IdeaProjects\\Homework-for-CSAB\\src\\" +fileName));
+      sc.nextLine();
       int lineCount = 0;
 
       while (sc.hasNextLine())
       {
          String line = sc.nextLine().replaceAll(" ", "");
-         for (int i = 0; i < line.length() - 1; i++)
+         for (int i = 0; i < line.length(); i++)
          {
-            grid[lineCount][i] = Integer.parseInt(line.substring(i, i + 1));
+            if (i + 1 == line.length())
+               grid[lineCount][i] = Integer.parseInt(line.substring(i));
+            else
+               grid[lineCount][i] = Integer.parseInt(line.substring(i, i + 1));
          }
          lineCount++;
       }
@@ -151,22 +154,97 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public void displayVertices()
    {
-      Iterator <String> iter = vertices.keySet().iterator();
+      Iterator<String> iter = vertices.keySet().iterator();
+      while (iter.hasNext())
+      {
+         System.out.println(iter.next());
+      }
    }
 
    public void displayGrid()
    {
-
+      String result = "";
+      for (int[] x : grid)
+      {
+         for (int y : x)
+         {
+            result = result +y +" ";
+         }
+         result = result +"\n";
+      }
+      System.out.println(result);
    }
    
    public void allPairsReachability()
    {
-   
+      List<String> reachables;
+      for (int i = 0; i < grid.length; i++)
+      {
+         reachables = getReachables(nameList.get(i));
+         for (String s : reachables)
+         {
+            grid[i][vertices.get(s)] = 1;
+         }
+      }
    }
    
    public List<String> getReachables(String from)
    {
+      ArrayList<String> result = new ArrayList<>();
+      int columnCounter = 0;
+      for (int x : grid[nameList.indexOf(from)])
+      {
+         if (grid[nameList.indexOf(from)][columnCounter] > 0)
+         {
+            if (!result.contains(from))
+            {
+               result.add(nameList.get(columnCounter));
+               grid[nameList.indexOf(from)][columnCounter] = 1;
+               List<String> append = getReachables(nameList.get(columnCounter));
    
+               for (String s : append)
+               {
+                  if (!result.contains(s))
+                  {
+                     result.add(s);
+                     grid[nameList.indexOf(from)][vertices.get(s)] = 1;
+                  }
+               }
+            }
+            if (nameList.indexOf(from) == columnCounter)
+               return null;
+            /*if (!result.contains(from))
+            {
+               List<String> append = getReachables(nameList.get(columnCounter));
+   
+               for (String s : append)
+               {
+                  if (!result.contains(s))
+                  {
+                     result.add(s);
+                     grid[nameList.indexOf(from)][vertices.get(s)] = 1;
+                  }
+               }
+            }*/
+         }
+         columnCounter++;
+      }
+      for (String adjacent : result)
+      {
+         if (!result.contains(adjacent))
+         {
+            List<String> append = getReachables(adjacent);
+   
+            for (String s : append)
+            {
+               if (!result.contains(s))
+               {
+                  result.add(s);
+               }
+            }
+         }
+      }
+      return result;
    }
 } // AdjMat
 
@@ -192,6 +270,8 @@ Warshall To-Do List:
 [x] getVertices()
 [x] readNames()
 [x] readGrid()
-[ ] displayVertices()
+[x] displayVertices()
+[x] displayGrid()
+[ ] getReachables()
 [ ] allPairsReachability()
  */

@@ -158,6 +158,9 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface// , DFS_BFS ,
         String result = "";
         for (Vertex i : vertices)
         {
+            
+            
+            
             result += i.toString() +"\n" ;
         }
         return result;
@@ -210,23 +213,3 @@ Pd6SamuelPrudencioAdjList
 [x] addEdge(String source, String target)
 [x] toString()
  */
-
-/*
-Extra Credit Private Variable: private boolean[] visited = new boolean[10];
-
-First Extra Credit Method: return depthFirstRecurHelper(vertices.get(nameToIndex.get(name)), result);
-
-Second Extra Credit Method: return depthFirstRecurHelper(v, result);
-
-Third Extra Credit Method: List<Vertex> result = new ArrayList<>();
-
-        visited[nameToIndex.get(v.getName())] = true;
-        result.add(vertices.get(nameToIndex.get(v.getName())));
-
-        for (int i = 0; i < vertices.size(); i++)
-        {
-        if (!visited[i])
-        depthFirstRecurHelper(vertices.get(i), vertices);
-        }
-        return result;
-*/
