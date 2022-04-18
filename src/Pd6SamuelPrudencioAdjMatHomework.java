@@ -155,8 +155,10 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
       Iterator<String> iter = vertices.keySet().iterator();
       while (iter.hasNext())
       {
-         System.out.println(iter.next());
+         String key = iter.next();
+         System.out.println(vertices.get(key) +"-" +key);
       }
+      System.out.println();
    }
 
    public void displayGrid()
@@ -175,73 +177,30 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public void allPairsReachability()
    {
-      List<String> reachables;
       for (int i = 0; i < grid.length; i++)
       {
-         reachables = getReachables(nameList.get(i));
-         for (String s : reachables)
+         for (int k = 0; k < grid.length; k++)
          {
-            grid[i][vertices.get(s)] = 1;
+            if (grid[i][k] == 1)
+            {
+               for (int j = 0; j < grid.length; j++)
+               {
+                  if (grid[k][j] == 1)
+                     grid[i][j] = 1;
+               }
+            }
          }
       }
    }
    
    public List<String> getReachables(String from)
    {
-      ArrayList<String> result = new ArrayList<>();
-      int columnCounter = 0;
-      for (int x : grid[nameList.indexOf(from)])
+      List<String> result = new ArrayList<>();
+      for (int x = 0; x < grid.length; x++)
       {
-         if (grid[nameList.indexOf(from)][columnCounter] > 0)
-         {
-            if (!result.contains(from))
-            {
-               result.add(nameList.get(columnCounter));
-               grid[nameList.indexOf(from)][columnCounter] = 1;
-               List<String> append = getReachables(nameList.get(columnCounter));
-   
-               for (String s : append)
-               {
-                  if (!result.contains(s))
-                  {
-                     result.add(s);
-                     grid[nameList.indexOf(from)][vertices.get(s)] = 1;
-                  }
-               }
-            }
-            if (nameList.indexOf(from) == columnCounter)
-               return null;
-            /*if (!result.contains(from))
-            {
-               List<String> append = getReachables(nameList.get(columnCounter));
-   
-               for (String s : append)
-               {
-                  if (!result.contains(s))
-                  {
-                     result.add(s);
-                     grid[nameList.indexOf(from)][vertices.get(s)] = 1;
-                  }
-               }
-            }*/
-         }
-         columnCounter++;
+         if (grid[vertices.get(from)][x] == 1)
+            result.add(nameList.get(x));
       }
-      /*for (String adjacent : result)
-      {
-         if (!result.contains(adjacent))
-         {
-            List<String> append = getReachables(adjacent);
-   
-            for (String s : append)
-            {
-               if (!result.contains(s))
-               {
-                  result.add(s);
-               }
-            }
-         }
-      }*/
       return result;
    }
 } // AdjMat
