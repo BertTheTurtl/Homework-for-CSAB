@@ -110,9 +110,7 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
    
    public boolean isEdge(String from, String to)
    {
-      int fromInt = vertices.get(from);
-      int toInt = vertices.get(to);
-      return grid[fromInt][toInt] == 1;
+      return isEdge(vertices.get(from), vertices.get(to));
    }
    
    public Map<String, Integer> getVertices()
@@ -229,7 +227,7 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
          }
          columnCounter++;
       }
-      for (String adjacent : result)
+      /*for (String adjacent : result)
       {
          if (!result.contains(adjacent))
          {
@@ -243,7 +241,7 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
                }
             }
          }
-      }
+      }*/
       return result;
    }
 } // AdjMat
