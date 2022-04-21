@@ -39,12 +39,13 @@ interface Floyd
    void allPairsWeighted(); 
 }
 
-class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
+class AdjMat implements AdjacencyMatrix, Warshall,Floyd
 {
    private int[][] grid = null;   //adjacency matrix representation
    private Map<String, Integer> vertices = null;   // name maps to index (for Warshall & Floyd)
    /*for Warshall's Extension*/  ArrayList<String> nameList = null;  //reverses the map, index-->name
-	  
+   private int INFINITY = 9999;
+   
    /*  enter your code here  */  
    public AdjMat (int size)
    {
@@ -90,7 +91,7 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
       {
          for (int y = 0; y < grid.length; y++)
          {
-            if (grid[x][y] == 1)
+            if (grid[x][y] > 0 && grid[x][y] < INFINITY)
                count++;
          }
       }
@@ -138,13 +139,10 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
 
       while (sc.hasNextLine())
       {
-         String line = sc.nextLine().replaceAll(" ", "");
-         for (int i = 0; i < line.length(); i++)
+         String[] list = sc.nextLine().split(" ");
+         for (int i = 0; i < list.length; i++)
          {
-            if (i + 1 == line.length())
-               grid[lineCount][i] = Integer.parseInt(line.substring(i));
-            else
-               grid[lineCount][i] = Integer.parseInt(line.substring(i, i + 1));
+             grid[lineCount][i] = Integer.parseInt(list[i]);
          }
          lineCount++;
       }
@@ -202,6 +200,37 @@ class AdjMat implements AdjacencyMatrix, Warshall//,Floyd
             result.add(nameList.get(x));
       }
       return result;
+   }
+   
+   public int getCost(int from, int to)
+   {
+      return grid[from][to];
+   }
+
+   public int getCost(String from, String to)
+   {
+      return getCost(vertices.get(from), vertices.get(to));
+   }
+
+   public void allPairsWeighted()
+   {
+      for (int k = 0; k < grid.length; k++)
+      {
+         for(int i = 0; i < grid.length; i++)
+         {
+            if(i != k)
+            {
+               if(grid[i][k] != INFINITY)
+               {
+                  for(int j = 0; j < grid.length; j++)
+                  {
+                     if(grid[i][k] + grid[k][j] < grid[i][j])
+                        grid[i][j] = grid[i][k] + grid[k][j];
+                  }
+               }
+            }
+         }
+      }
    }
 } // AdjMat
 
