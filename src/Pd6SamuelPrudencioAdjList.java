@@ -104,13 +104,11 @@ interface EdgeListWithCities
 }
 
 
-public class Pd6SamuelPrudencioAdjList implements AdjListInterface// , DFS_BFS , EdgeListWithCities
+public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, EdgeListWithCities
 {
    private ArrayList<Vertex> vertices = new ArrayList<Vertex>();
    private Map<String, Integer> nameToIndex = new TreeMap<String, Integer>();
-
-  
- /* enter your code here  */
+   
     //Accessor Methods
     public List<Vertex> getVertices()
     {
@@ -158,30 +156,27 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface// , DFS_BFS ,
         String result = "";
         for (Vertex i : vertices)
         {
-            
-            
-            
             result += i.toString() +"\n" ;
         }
         return result;
     }
  
  /*  three extra credit methods, recursive version  */
-   List<Vertex> depthFirstRecur(String name)
+   public List<Vertex> depthFirstRecur(String name)
    {
        ArrayList<Vertex> result = new ArrayList<>();
        depthFirstRecurHelper(vertices.get(nameToIndex.get(name)), result);
        return result;
    }
    
-   List<Vertex> depthFirstRecur(Vertex v)
+   public List<Vertex> depthFirstRecur(Vertex v)
    {
        ArrayList<Vertex> result = new ArrayList<>();
        depthFirstRecurHelper(v, result);
        return result;
    }
 
-   void depthFirstRecurHelper(Vertex v, ArrayList<Vertex> reachable)
+   public void depthFirstRecurHelper(Vertex v, ArrayList<Vertex> reachable)
    {
        if (reachable.contains(v))
        {
@@ -192,7 +187,30 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface// , DFS_BFS ,
        {
            depthFirstRecurHelper(i, reachable);
        }
-   }   
+   }
+   
+   /* DFS and BFS methods*/
+   public List<Vertex> depthFirstSearch(String name)
+   {
+       return null;
+   }
+   
+   public List<Vertex> depthFirstSearch(Vertex v)
+   {
+       return null;
+   }
+   
+   public List<Vertex> breadthFirstSearch(String name)
+   {
+       return null;
+   }
+   
+   public List<Vertex> breadthFirstSearch(Vertex v)
+   {
+       return null;
+   }
+    
+    public static void main(String[] args) {}
 }
 
 /*
@@ -212,4 +230,13 @@ Pd6SamuelPrudencioAdjList
 [x] addVertex(String v)
 [x] addEdge(String source, String target)
 [x] toString()
+
+DFS and BFS:
+[ ] depthFirstSearch(String)
+[ ] depthFirstSearch(Vertex)
+[ ] breadthFirstSearch(String)
+[ ] breadthFirstSearch(Vertex)
+[x] depthFirstRecur(String)
+[x] depthFirstRecur(Vertex)
+[x] depthFirstRecurHelper()
  */
