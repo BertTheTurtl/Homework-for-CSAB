@@ -192,21 +192,50 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
    /* DFS and BFS methods*/
    public List<Vertex> depthFirstSearch(String name)
    {
-       return null;
+       return depthFirstSearch(vertices.get(nameToIndex.get(name)));
    }
    
    public List<Vertex> depthFirstSearch(Vertex v)
    {
+       List<Vertex> result = new ArrayList<>();
+       Stack<Vertex> children = new Stack<>();
+       result.add(v);
+       for (Vertex i : v.getAdjacencies())
+       {
+           children.push(i);
+           /*for (Vertex next : i.getAdjacencies())
+           {
+               children.push(next);
+           }*/
+       }
+       for (Vertex x : children)
+       {
+       
+       }
        return null;
    }
    
    public List<Vertex> breadthFirstSearch(String name)
    {
-       return null;
+       return breadthFirstSearch(vertices.get(nameToIndex.get(name)));
    }
    
    public List<Vertex> breadthFirstSearch(Vertex v)
    {
+       List<Vertex> result = new ArrayList<>();
+       Queue<Vertex> neighbors = new LinkedList<>();
+       result.add(v);
+       for (Vertex i : v.getAdjacencies())
+       {
+           neighbors.add(i);
+       }
+       for (Vertex x : neighbors)
+       {
+           for (Vertex next : x.getAdjacencies())
+           {
+           
+           }
+       }
        return null;
    }
     
@@ -232,9 +261,9 @@ Pd6SamuelPrudencioAdjList
 [x] toString()
 
 DFS and BFS:
-[ ] depthFirstSearch(String)
+[x] depthFirstSearch(String)
 [ ] depthFirstSearch(Vertex)
-[ ] breadthFirstSearch(String)
+[x] breadthFirstSearch(String)
 [ ] breadthFirstSearch(Vertex)
 [x] depthFirstRecur(String)
 [x] depthFirstRecur(Vertex)
