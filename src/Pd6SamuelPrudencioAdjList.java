@@ -199,7 +199,7 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
    {
        List<Vertex> result = new ArrayList<>();
        Stack<Vertex> children = new Stack<>();
-       result.add(v);
+       /*result.add(v);
        for (Vertex i : v.getAdjacencies())
        {
            children.push(i);
@@ -214,7 +214,25 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
                if (!children.contains(x))
                    adjacent.push(x);
            }
+       }*/
+       
+       children.push(v);
+       result.add(v);
+       
+       while (!children.isEmpty())
+       {
+           Vertex x = children.pop();
+           
+           for (Vertex w : x.getAdjacencies())
+           {
+               if (!result.contains(w))
+               {
+                   children.push(w);
+                   result.add(w);
+               }
+           }
        }
+       
        return result;
    }
    
@@ -243,7 +261,7 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
                }
            }
        }
-       return result;
+       return null;
    }
     
     public static void main(String[] args) {}
