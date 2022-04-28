@@ -203,16 +203,19 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
        for (Vertex i : v.getAdjacencies())
        {
            children.push(i);
-           /*for (Vertex next : i.getAdjacencies())
-           {
-               children.push(next);
-           }*/
        }
-       for (Vertex x : children)
+       while (!children.isEmpty())
        {
-       
+           Stack<Vertex> adjacent = new Stack<>();
+           Vertex holder = children.pop();
+           for (Vertex x : holder.getAdjacencies())
+           {
+               result.add(holder);
+               if (!children.contains(x))
+                   adjacent.push(x);
+           }
        }
-       return null;
+       return result;
    }
    
    public List<Vertex> breadthFirstSearch(String name)
@@ -229,14 +232,18 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
        {
            neighbors.add(i);
        }
-       for (Vertex x : neighbors)
+       for (int i = 0; i < neighbors.size(); i++) //
        {
-           for (Vertex next : x.getAdjacencies())
+           /*VERY WRONG*/for (Vertex next : neighbors.peek().getAdjacencies())
            {
-           
+               if (!neighbors.contains(next))
+               {
+                   result.add(next);
+                   neighbors.add(next);
+               }
            }
        }
-       return null;
+       return result;
    }
     
     public static void main(String[] args) {}
