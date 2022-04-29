@@ -1,5 +1,5 @@
 // Name: Samuel Prudencio
-// Date: 4/11/2022
+// Date: 4/29/2022
  
 import java.util.*;
 import java.io.*;
@@ -260,9 +260,9 @@ Pd6SamuelPrudencioAdjList
 
 DFS and BFS:
 [x] depthFirstSearch(String)
-[ ] depthFirstSearch(Vertex)
+[x] depthFirstSearch(Vertex)
 [x] breadthFirstSearch(String)
-[ ] breadthFirstSearch(Vertex)
+[x] breadthFirstSearch(Vertex)
 [x] depthFirstRecur(String)
 [x] depthFirstRecur(Vertex)
 [x] depthFirstRecurHelper()
