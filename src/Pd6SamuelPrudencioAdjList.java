@@ -197,25 +197,20 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
    
    public List<Vertex> depthFirstSearch(Vertex v)
    {
-       List<Vertex> result = new ArrayList<>();
+       List<Vertex> visited = new ArrayList<>();
        Stack<Vertex> children = new Stack<>();
-       result.add(v);
-       for (Vertex i : v.getAdjacencies())
+       children.push(v);
+       while(!children.isEmpty())
        {
-           children.push(i);
-       }
-       while (!children.isEmpty())
-       {
-           Stack<Vertex> adjacent = new Stack<>();
-           Vertex holder = children.pop();
-           for (Vertex x : holder.getAdjacencies())
+           Vertex top = children.pop();
+           if (!visited.contains(top))
            {
-               result.add(holder);
-               if (!children.contains(x))
-                   adjacent.push(x);
+               visited.add(top);
+               for (Vertex x : top.getAdjacencies())
+                   children.add(x);
            }
        }
-       return result;
+       return visited;
    }
    
    public List<Vertex> breadthFirstSearch(String name)
@@ -225,25 +220,21 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
    
    public List<Vertex> breadthFirstSearch(Vertex v)
    {
-       List<Vertex> result = new ArrayList<>();
-       Queue<Vertex> neighbors = new LinkedList<>();
-       result.add(v);
-       for (Vertex i : v.getAdjacencies())
+       List<Vertex> visited = new ArrayList<>();
+       Queue<Vertex> q = new LinkedList<>();
+       q.add(v);
+       while(!q.isEmpty())
        {
-           neighbors.add(i);
-       }
-       for (int i = 0; i < neighbors.size(); i++) //
-       {
-           /*VERY WRONG*/for (Vertex next : neighbors.peek().getAdjacencies())
+           Vertex top = q.remove();
+
+           if (!visited.contains(top))
            {
-               if (!neighbors.contains(next))
-               {
-                   result.add(next);
-                   neighbors.add(next);
-               }
+               visited.add(top);
+               for (Vertex x : top.getAdjacencies())
+                   q.add(x);
            }
        }
-       return result;
+       return visited;
    }
     
     public static void main(String[] args) {}
