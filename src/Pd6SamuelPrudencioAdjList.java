@@ -1,5 +1,5 @@
 // Name: Samuel Prudencio
-// Date: 4/11/2022
+// Date: 4/29/2022
  
 import java.util.*;
 import java.io.*;
@@ -197,43 +197,20 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
    
    public List<Vertex> depthFirstSearch(Vertex v)
    {
-       List<Vertex> result = new ArrayList<>();
+       List<Vertex> visited = new ArrayList<>();
        Stack<Vertex> children = new Stack<>();
-       /*result.add(v);
-       for (Vertex i : v.getAdjacencies())
-       {
-           children.push(i);
-       }
-       while (!children.isEmpty())
-       {
-           Stack<Vertex> adjacent = new Stack<>();
-           Vertex holder = children.pop();
-           for (Vertex x : holder.getAdjacencies())
-           {
-               result.add(holder);
-               if (!children.contains(x))
-                   adjacent.push(x);
-           }
-       }*/
-       
        children.push(v);
-       result.add(v);
-       
-       while (!children.isEmpty())
+       while(!children.isEmpty())
        {
-           Vertex x = children.pop();
-           
-           for (Vertex w : x.getAdjacencies())
+           Vertex top = children.pop();
+           if (!visited.contains(top))
            {
-               if (!result.contains(w))
-               {
-                   children.push(w);
-                   result.add(w);
-               }
+               visited.add(top);
+               for (Vertex x : top.getAdjacencies())
+                   children.add(x);
            }
        }
-       
-       return result;
+       return visited;
    }
    
    public List<Vertex> breadthFirstSearch(String name)
@@ -243,25 +220,21 @@ public class Pd6SamuelPrudencioAdjList implements AdjListInterface, DFS_BFS //, 
    
    public List<Vertex> breadthFirstSearch(Vertex v)
    {
-       List<Vertex> result = new ArrayList<>();
-       Queue<Vertex> neighbors = new LinkedList<>();
-       result.add(v);
-       for (Vertex i : v.getAdjacencies())
+       List<Vertex> visited = new ArrayList<>();
+       Queue<Vertex> q = new LinkedList<>();
+       q.add(v);
+       while(!q.isEmpty())
        {
-           neighbors.add(i);
-       }
-       for (int i = 0; i < neighbors.size(); i++) //
-       {
-           /*VERY WRONG*/for (Vertex next : neighbors.peek().getAdjacencies())
+           Vertex top = q.remove();
+
+           if (!visited.contains(top))
            {
-               if (!neighbors.contains(next))
-               {
-                   result.add(next);
-                   neighbors.add(next);
-               }
+               visited.add(top);
+               for (Vertex x : top.getAdjacencies())
+                   q.add(x);
            }
        }
-       return null;
+       return visited;
    }
     
     public static void main(String[] args) {}
@@ -287,9 +260,9 @@ Pd6SamuelPrudencioAdjList
 
 DFS and BFS:
 [x] depthFirstSearch(String)
-[ ] depthFirstSearch(Vertex)
+[x] depthFirstSearch(Vertex)
 [x] breadthFirstSearch(String)
-[ ] breadthFirstSearch(Vertex)
+[x] breadthFirstSearch(Vertex)
 [x] depthFirstRecur(String)
 [x] depthFirstRecur(Vertex)
 [x] depthFirstRecurHelper()
