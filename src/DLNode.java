@@ -1,10 +1,10 @@
 public class DLNode <E extends Comparable>
 {
     private E value;
-    private DLNodeCopy prev;
-    private DLNodeCopy next;
+    private DLNode prev;
+    private DLNode next;
     
-    public DLNode (E arg, DLNodeCopy<E> p, DLNodeCopy<E> n)
+    public DLNode (E arg, DLNode<E> p, DLNode<E> n)
     {
         value = arg;
         prev = p;
@@ -23,22 +23,22 @@ public class DLNode <E extends Comparable>
         value = arg;
     }
     
-    public void setNext (DLNodeCopy<E> arg)
+    public void setNext (DLNode<E> arg)
     {
         next = arg;
     }
     
-    public void setPrev (DLNodeCopy<E> arg)
+    public void setPrev (DLNode<E> arg)
     {
         prev = arg;
     }
     
-    public DLNodeCopy<E> getNext()
+    public DLNode<E> getNext()
     {
         return next;
     }
     
-    public DLNodeCopy<E> getPrev ()
+    public DLNode<E> getPrev ()
     {
         return prev;
     }
@@ -56,17 +56,17 @@ public class DLNode <E extends Comparable>
     
     }
     
-    public void moveNode (DLNodeCopy<E> t)
+    public void moveNode (DLNode<E> t)
     {
     
     }
     
-    public void insert (DLNodeCopy<E> t, Object obj)
+    public void insert (DLNode<E> t, Object obj)
     {
     
     }
     
-    public void remove (DLNodeCopy<E> t)
+    public void remove (DLNode<E> t)
     {
     
     }
