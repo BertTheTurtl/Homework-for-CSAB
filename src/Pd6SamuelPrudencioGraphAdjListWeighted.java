@@ -118,10 +118,14 @@ public class Pd6SamuelPrudencioGraphAdjListWeighted
    {
       // your code goes here
       // Step 1: set the min distance from source to infinity
-      
+      for (wVertex v : vertices)
+      {
+         v.setMinDistance(Double.POSITIVE_INFINITY);
+         v.setPrevious(source);
+      }
       
       // set the min distance to itself to 0
-      
+      source.setMinDistance(0.0);
       
       // create a priority queue 
       PriorityQueue<wVertex> vertexQueue = new PriorityQueue<wVertex>();
@@ -131,9 +135,22 @@ public class Pd6SamuelPrudencioGraphAdjListWeighted
    
       // start processing the priority queue. 
       while (!vertexQueue.isEmpty()) 
-      {  
+      {
+         wVertex current = vertexQueue.remove();
+         
+         for (Edge e : current.getAdjacencies())
+         {
+            if (e.getWeight() + current.getMinDistance() < e.getTarget().getMinDistance())
+            {
+               e.getTarget().setMinDistance(e.getWeight() + current.getMinDistance());
+               e.getTarget().setPrevious(current);
+            }
+            if (!vertexQueue.contains(e.getTarget()) && !e.getTarget().equals(current))
+            {
+               vertexQueue.add(e.getTarget());
+            }
+         }
       } // while
-      
    }  // end of private minimumWeightPath
    
    // returns the shortest path from source to vertexName  
@@ -143,9 +160,33 @@ public class Pd6SamuelPrudencioGraphAdjListWeighted
    }
    public List<wVertex> getShortestPathTo(wVertex v) 
    {
-   
-      // your code goes here
-      return null;
+      List<wVertex> backwardResult = new ArrayList<>();
+      wVertex current = v;
+      
+      //if the end point is the same as source, just return the backwardResult
+      if (current == current.getPrevious())
+      {
+         backwardResult.add(current);
+         return backwardResult;
+      }
+      
+      //adds to the ArrayList STARTING from the end wVertex and working backwards
+      while (!current.equals(current.getPrevious()))
+      {
+         backwardResult.add(current.getPrevious());
+         current = current.getPrevious();
+      }
+      
+      List<wVertex> result = new ArrayList<>();
+      
+      //reversing the backwardResult to get the shortest path TO
+      for (int i = backwardResult.size() - 1; i > 0; i--)
+      {
+         int counter = 0;
+         result.add(counter, backwardResult.get(i));
+         counter++;
+      }
+      return result;
    }
 
    //**************************************   main   *********************************************/
@@ -208,6 +249,6 @@ To-Do List:
     [x] getTarget()
     [x] getWeight()
 [ ] AdjList
-    [ ] minimumWeightPath()
+    [x] minimumWeightPath()
     [ ] getShortestPathTo()
  */
