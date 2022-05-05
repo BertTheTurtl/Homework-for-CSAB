@@ -1,7 +1,7 @@
 /*
  * Name: Samuel Prudencio
  * Period: 6
- * What I learned:
+ * What I learned: How to code Dijkstra's Algorithm instead of doing it by hand
  */
 
 import java.io.*;
@@ -160,32 +160,20 @@ public class Pd6SamuelPrudencioGraphAdjListWeighted
    }
    public List<wVertex> getShortestPathTo(wVertex v) 
    {
-      List<wVertex> backwardResult = new ArrayList<>();
+      List<wVertex> result = new ArrayList<>();
       wVertex current = v;
       
       //if the end point is the same as source, just return the backwardResult
       if (current == current.getPrevious())
       {
-         backwardResult.add(current);
-         return backwardResult;
+         result.add(current);
+         return result;
       }
       
       //adds to the ArrayList STARTING from the end wVertex and working backwards
-      while (!current.equals(current.getPrevious()))
-      {
-         backwardResult.add(current.getPrevious());
-         current = current.getPrevious();
-      }
+      result = getShortestPathTo(v.getPrevious());
+      result.add(current);
       
-      List<wVertex> result = new ArrayList<>();
-      
-      //reversing the backwardResult to get the shortest path TO
-      for (int i = backwardResult.size() - 1; i > 0; i--)
-      {
-         int counter = 0;
-         result.add(counter, backwardResult.get(i));
-         counter++;
-      }
       return result;
    }
 
@@ -248,7 +236,7 @@ To-Do List:
 [x] Edge
     [x] getTarget()
     [x] getWeight()
-[ ] AdjList
+[x] AdjList
     [x] minimumWeightPath()
-    [ ] getShortestPathTo()
+    [x] getShortestPathTo()
  */
