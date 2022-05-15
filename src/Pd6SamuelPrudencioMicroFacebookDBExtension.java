@@ -1,26 +1,41 @@
 /*
 Name: Samuel Prudencio
 Period: 6
-Name of the Lab: Mini Facebook Project
-Purpose of the Program: To use many data structures and things we learned throughout the year to craft a complex program
+Name of the Lab: Micro Facebook DB Extension
+Purpose of the Program: To know how to send info to an external file, read that info, and STILL allow a user to input
+                        commands
 What I learned:
-    * How to get creative with the use of methods and switch case
-    * Had to relearn the full purpose of static
-    * Had to remember that break is needed in switch case
-How I feel about this lab: Very good, I was able to finish it before going to bed. Although, I did stay up a long time
-What I wonder: Is there a better way to accomplish the program?
+    * How to send text to an external file without taking from the command entry
+    * How to generate random strings using type casting and ASCII
+How I feel about this lab: Very good, I was able to finish it in one night just like part one
+What I wonder: Is there a more efficient way of accomplishing this task that I overlooked?
  */
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.*;
 
-public class Pd6SamuelPrudencioMicroFB
+public class Pd6SamuelPrudencioMicroFacebookDBExtension
 {
-    private static Map<String, Person> accounts = new HashMap<>();
+    private static Map<String, PersonExtended> accounts = new HashMap<>();
     private static Map<String, Boolean> friendCheck = new HashMap<>();
+    private static PrintWriter pw;
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
         Scanner sc = new Scanner(System.in);
+        System.out.print("Please enter how many accounts you would like to create: ");
+        int accountNumber = sc.nextInt();
+        pw = new PrintWriter("Pd6SamuelPrudencioPerson.txt");
+        randomAccountCreater(accountNumber);
+        pw.close();
+
+        Scanner file = new Scanner((new File("Pd6SamuelPrudencioPerson.txt")));
+        while (file.hasNextLine())
+        {
+            System.out.println(file.nextLine());
+        }
+        sc = new Scanner(System.in);
 
         while (true)
         {
@@ -30,7 +45,7 @@ public class Pd6SamuelPrudencioMicroFB
             switch(command)
             {
                 case "P":
-                    Person name = new Person(input.substring(2));
+                    PersonExtended name = new PersonExtended(input.substring(2));
                     accounts.put(input.substring(2), name);
                     break;
                 case "F":
@@ -69,8 +84,8 @@ public class Pd6SamuelPrudencioMicroFB
             System.out.println("One of these is not an account");
             return;
         }
-        Person p1 = accounts.get(name1);
-        Person p2 = accounts.get(name2);
+        PersonExtended p1 = accounts.get(name1);
+        PersonExtended p2 = accounts.get(name2);
         p1.makeFriend(p2);
         p2.makeFriend(p1);
         friendCheck.put(p1 +"*" +p2, true);
@@ -85,8 +100,8 @@ public class Pd6SamuelPrudencioMicroFB
             System.out.println("One of these is not an account");
             return;
         }
-        Person p1 = accounts.get(name1);
-        Person p2 = accounts.get(name2);
+        PersonExtended p1 = accounts.get(name1);
+        PersonExtended p2 = accounts.get(name2);
         p1.removeFriend(p2);
         p2.removeFriend(p1);
         friendCheck.remove(p1 +"*" +p2);
@@ -101,23 +116,40 @@ public class Pd6SamuelPrudencioMicroFB
             System.out.println("One of these is not an account");
             return Boolean.FALSE;
         }
-        Person p1 = accounts.get(name1);
-        Person p2 = accounts.get(name2);
+        PersonExtended p1 = accounts.get(name1);
+        PersonExtended p2 = accounts.get(name2);
         if (!friendCheck.get(p1 +"*" +p2) || friendCheck.get(p1 +"*" +p2) == null)
             return Boolean.FALSE;
         else
             return Boolean.TRUE;
     }
+
+    //Pre: Requires a given number of accounts to create
+    //Post: Creates random accounts, adds them to the internal lists, and adds them to the external file
+    public static void randomAccountCreater(int numOfAccounts)
+    {
+        for (int i = 0; i < numOfAccounts; i++)
+        {
+            String newAccount = "";
+            for (int k = 0; k < 5; k++)
+            {
+                newAccount = newAccount +(char)(Math.random() * (122 - 97 + 1) + 97);
+            }
+            PersonExtended name = new PersonExtended(newAccount);
+            accounts.put(newAccount, name);
+            pw.println("P " +newAccount);
+        }
+    }
 }
 
-class Person
+class PersonExtended
 {
     private final String name;
-    private LinkedList<Person> friends;
-    
+    private LinkedList<PersonExtended> friends;
+
     //Pre: A given name
     //Post: Constructor (P)
-    public Person(String givenName)
+    public PersonExtended(String givenName)
     {
         name = givenName;
         friends = new LinkedList<>();
@@ -125,16 +157,16 @@ class Person
 
     //Pre: The person to be added as a friend
     //Post: Add a new person to their friends list (F)
-    public void makeFriend(Person friend)
+    public void makeFriend(PersonExtended friend)
     {
         if (this == friend)
             return;
         friends.add(friend);
     }
-    
+
     //Pre: The person to be removed from the friends list
     //Post: Removes the Person from the friends list (U)
-    public void removeFriend(Person friend)
+    public void removeFriend(PersonExtended friend)
     {
         if (this == friend || !friends.contains(friend))
             return;
@@ -146,7 +178,7 @@ class Person
     public String friendsList()
     {
         String result = "  Friend (s): ";
-        for (Person p : friends)
+        for (PersonExtended p : friends)
         {
             result = result +p +" ";
         }
@@ -163,29 +195,34 @@ class Person
 
 /*
 Output:
-P Sam
-P Liza
-P Mark
-P Amy
-F Liza Amy
-F Liza Mark
-F Amy Sam
-L Amy
-  Friend (s): Liza Sam
-L Sam
-  Friend (s): Amy
-U Liza Amy
-L Amy
-  Friend (s): Sam
-Q Liza Mark
+Please enter how many accounts you would like to create: 10
+P hleqt
+P nazhu
+P ypxaa
+P enyrc
+P jcitb
+P ndimd
+P acnqj
+P cdanb
+P yrgam
+P wgmkc
+P sam
+P don
+P frong
+F sam don
+F sam frong
+F sam cdanb
+L sam
+  Friend (s): don frong cdanb
+Q sam cdnab
+One of these is not an account
+  No, they are not friends
+Q sam cdanb
   Yes, they are friends
-P Edmund
-P Esther
-F Edmund Mark
-F Mark Esther
-L Mark
-  Friend (s): Liza Edmund Esther
+U sam don
+L sam
+  Friend (s): frong cdanb
 X
 
 Process finished with exit code 0
- */
+*/
