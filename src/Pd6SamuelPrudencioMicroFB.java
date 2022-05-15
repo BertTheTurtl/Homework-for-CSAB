@@ -60,7 +60,8 @@ public class Pd6SamuelPrudencioMicroFB
         }
     }
 
-    //Creates a new link between two people (F)
+    //Pre: Requires the two names given
+    //Post: Creates a new link between two people (F)
     public static void makeFriends(String name1, String name2)
     {
         Person p1 = accounts.get(name1);
@@ -70,7 +71,8 @@ public class Pd6SamuelPrudencioMicroFB
         friendCheck.put(p1 +"*" +p2, true);
     }
 
-    //Removes an existing link between two people (U)
+    //Pre: Requires the two names given
+    //Post: Removes an existing link between two people (U)
     public static void removeFriends(String name1, String name2)
     {
         Person p1 = accounts.get(name1);
@@ -80,7 +82,8 @@ public class Pd6SamuelPrudencioMicroFB
         friendCheck.remove(p1 +"*" +p2);
     }
 
-    //Checks if two people are friends (Q)
+    //Pre: Requires the two names given
+    //Post: Checks if two people are friends (Q)
     public static Boolean friendChecker(String name1, String name2)
     {
         Person p1 = accounts.get(name1);
@@ -94,14 +97,16 @@ class Person
     private final String name;
     private LinkedList<Person> friends;
     
-    //Constructor (P)
+    //Pre: A given name
+    //Post: Constructor (P)
     public Person(String givenName)
     {
         name = givenName;
         friends = new LinkedList<>();
     }
-    
-    //Add a new person to their friends list (F)
+
+    //Pre: The person to be added as a friend
+    //Post: Add a new person to their friends list (F)
     public void makeFriend(Person friend)
     {
         if (this == friend)
@@ -109,7 +114,8 @@ class Person
         friends.add(friend);
     }
     
-    //Removes the Person from the friends list (U)
+    //Pre: The person to be removed from the friends list
+    //Post: Removes the Person from the friends list (U)
     public void removeFriend(Person friend)
     {
         if (this == friend || !friends.contains(friend))
@@ -117,7 +123,8 @@ class Person
         friends.remove(friend);
     }
 
-    //Prints out the friends list (L)
+    //Pre: N/A
+    //Post: Prints out the friends list (L)
     public String friendsList()
     {
         String result = "  Friend (s): ";
@@ -128,7 +135,8 @@ class Person
         return result;
     }
 
-    //toString method
+    //Pre: N/A
+    //Post: toString method
     public String toString()
     {
         return name;
