@@ -118,7 +118,7 @@ public class Pd6SamuelPrudencioMicroFacebookDBExtension
         }
         PersonExtended p1 = accounts.get(name1);
         PersonExtended p2 = accounts.get(name2);
-        if (!friendCheck.get(p1 +"*" +p2) || friendCheck.get(p1 +"*" +p2) == null)
+        if (friendCheck.get(p1 +"*" +p2) == null || !friendCheck.get(p1 +"*" +p2))
             return Boolean.FALSE;
         else
             return Boolean.TRUE;

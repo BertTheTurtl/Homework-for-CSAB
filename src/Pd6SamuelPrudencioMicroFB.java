@@ -103,7 +103,7 @@ public class Pd6SamuelPrudencioMicroFB
         }
         Person p1 = accounts.get(name1);
         Person p2 = accounts.get(name2);
-        if (!friendCheck.get(p1 +"*" +p2) || friendCheck.get(p1 +"*" +p2) == null)
+        if (friendCheck.get(p1 +"*" +p2) == null || !friendCheck.get(p1 +"*" +p2))
             return Boolean.FALSE;
         else
             return Boolean.TRUE;
